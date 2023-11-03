@@ -1,1 +1,1 @@
-# laravel-tabelog-kadai
+# 食べログ風アプリ「NAGOYAMESHI」のリポジトリ
