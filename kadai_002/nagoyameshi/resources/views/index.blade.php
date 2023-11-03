@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'NAGOYAMESHI')
-
 @section('content')
+<h1>トップページ</h1>
 @endsection
