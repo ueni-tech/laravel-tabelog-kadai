@@ -1,10 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-5">
-      <h3 class="my-3">ログイン</h3>
+      <h3 class="mt-3 mb-3">ログイン</h3>
 
       @if (session('warning'))
       <div class="alert alert-danger">
@@ -13,8 +14,7 @@
       @endif
 
       <hr>
-
-      <form action="{{ route('dashboard.login') }}" method="POST">
+      <form method="POST" action="{{ route('dashboard.login') }}">
         @csrf
 
         <div class="form-group">
@@ -38,13 +38,16 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" class="mt-3 btn btn-primary w-100"></button>
+          <button type="submit" class="mt-3 btn btn-primary w-100">
+            ログイン
+          </button>
         </div>
       </form>
 
       <hr>
-
     </div>
   </div>
 </div>
+</div>
+
 @endsection
