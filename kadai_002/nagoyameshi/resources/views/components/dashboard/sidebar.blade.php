@@ -13,7 +13,6 @@
   <h2>カテゴリ管理</h2>
   <div class="d-flex flex-column">
     <label>カテゴリ一覧</label>
-    <label>カテゴリ登録</label>
   </div>
 
   <h2>その他</h2>
