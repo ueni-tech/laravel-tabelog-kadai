@@ -12,7 +12,9 @@
 
   <h2>カテゴリ管理</h2>
   <div class="d-flex flex-column">
-    <label>カテゴリ一覧</label>
+    <label>
+      <a href="{{route('categories.index')}}">カテゴリ一覧</a>
+    </label>
   </div>
 
   <h2>その他</h2>
@@ -20,4 +22,3 @@
     <label>会社情報管理</label>
   </div>
 </div>
-

@@ -10,7 +10,7 @@ class DashboardController extends Controller
     {
         if (!auth()->check()) {
             // ユーザーが認証されていない場合
-            return redirect()->route('dashboard.login');
+            return redirect()->route('login');
         }
         
         return view('dashboard.index');
