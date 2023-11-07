@@ -26,7 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:admins');
 
 Route::prefix('dashboard')->group(function () {
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [LoginController::class, 'login']);
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('dashboard.login');
+    Route::post('login', [LoginController::class, 'login'])->name('dashboard.login');
     Route::resource('categories', CategoryController::class)->middleware('auth:admins');
 });
