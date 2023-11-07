@@ -23,7 +23,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:admins');
 
-Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
-    Route::get('/login', [App\Http\Controllers\Dashboard\Auth\LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [App\Http\Controllers\Dashboard\Auth\LoginController::class, 'login'])->name('login');
-});
+Route::get('/dashboard/login', [App\Http\Controllers\Dashboard\Auth\LoginController::class, 'showLoginForm'])->name('dashboard.login');
+Route::post('/dashboard/login', [App\Http\Controllers\Dashboard\Auth\LoginController::class, 'login'])->name('dashboard.login');
