@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $category->name = $request->input('name');
         $category->save();
 
-        return to_route('categories.index');
+        return to_route('dashboard.categories.index');
     }
 
     /**
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         $category->name = $request->input('name');
         $category->save();
 
-        return to_route('categories.index');
+        return to_route('dashboard.categories.index');
     }
 
     /**
@@ -71,6 +71,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return to_route('categories.index');
+        return to_route('dashboard.categories.index');
     }
 }

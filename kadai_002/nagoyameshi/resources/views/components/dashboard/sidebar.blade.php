@@ -13,7 +13,7 @@
   <h2>カテゴリ管理</h2>
   <div class="d-flex flex-column">
     <label>
-      <a href="{{route('categories.index')}}">カテゴリ一覧</a>
+      <a href="{{route('dashboard.categories.index')}}">カテゴリ一覧</a>
     </label>
   </div>
 

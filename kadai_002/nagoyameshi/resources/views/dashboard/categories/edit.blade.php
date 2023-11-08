@@ -3,7 +3,7 @@
 @section('content')
 <div class="w-75">
   <h1>カテゴリ情報更新</h1>
-  <form method="POST" action="{{ route('categories.update', $category) }}">
+  <form method="POST" action="{{ route('dashboard.categories.update', $category) }}">
     @csrf
     @method('PUT')
     <div class="form-group">
@@ -13,6 +13,6 @@
     <button type="submit" class="btn btn-primary">更新</button>
   </form>
 
-  <a href="{{route('categories.index')}}" class="mt-4">カテゴリ一覧に戻る</a>
+  <a href="{{route('dashboard.categories.index')}}" class="mt-4">カテゴリ一覧に戻る</a>
 </div>
 @endsection

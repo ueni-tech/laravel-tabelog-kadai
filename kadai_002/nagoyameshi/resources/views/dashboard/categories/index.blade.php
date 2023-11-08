@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="w-75">
-  <form action="{{ route('categories.store') }}" method="POST">
+  <form action="{{ route('dashboard.categories.store') }}" method="POST">
     @csrf
     <div class="form-group">
       <label for="category-name">カテゴリ名</label>
@@ -26,10 +26,10 @@
         <th scope="row">{{ $category->id }}</th>
         <td>{{ $category->name }}</td>
         <td>
-          <a href="{{ route('categories.edit', $category) }}" class="btn btn-secondary">編集</a>
+          <a href="{{ route('dashboard.categories.edit', $category) }}" class="btn btn-secondary">編集</a>
         </td>
         <td>
-          <form action="{{ route('categories.destroy', $category) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
+          <form action="{{ route('dashboard.categories.destroy', $category) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">削除</button>
