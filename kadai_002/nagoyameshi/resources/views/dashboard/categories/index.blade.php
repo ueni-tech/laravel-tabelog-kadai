@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="w-75">
+<div class="w-75 m-auto">
   <form action="{{ route('dashboard.categories.store') }}" method="POST">
     @csrf
     <div class="form-group">

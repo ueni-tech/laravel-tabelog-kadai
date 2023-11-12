@@ -16,7 +16,7 @@
 </form>
 
 <div class="mt-2">
-  <div class="w-75">
+  <div class="w-75 m-auto">
     <form method="GET" action="{{route('dashboard.restaurants.index')}}">
       <div class="d-flex flex-inline form-group">
         <div class="d-flex align-items-center">
@@ -34,18 +34,25 @@
     <a href="{{route('dashboard.restaurants.create')}}" class="btn btn-primary">+ 新規作成</a>
   </div>
 
-  <div class="table-responsive">
-    <table class="table fixed-table mt-5">
+  <div class="table-responsive mt-5">
+  <div>
+    @if (session('message'))
+    <p>{{ session('message') }}</p>
+    @endif
+  </div>
+    <table class="table">
       <thead>
         <tr>
           <th scope="col">ID</th>
           <th scope="col" style="width: 8%;">画像</th>
-          <th scope="col">店舗名</th>
-          <th scope="col">説明</th>
+          <th scope="col" style="width: 8%;">店舗名</th>
+          <th scope="col" style="width: 13%;">説明</th>
           <th scope="col">郵便番号</th>
-          <th scope="col">住所</th>
+          <th scope="col" style="width: 12%;">住所</th>
           <th scope="col">開店時間</th>
           <th scope="col">閉店時間</th>
+          <th scope="col">定休日</th>
+          <th scope="col" style="width: 10%;">カテゴリ</th>
           <th scope="col"></th>
           <th scope="col"></th>
         </tr>
@@ -59,8 +66,18 @@
           <td>{{$restaurant->description}}</td>
           <td>{{$restaurant->postal_code}}</td>
           <td>{{$restaurant->address}}</td>
-          <td>{{$restaurant->opening_time}}</td>
-          <td>{{$restaurant->closing_time}}</td>
+          <td>{{$restaurant->opening_time->format('H:i')}}</td>
+          <td>{{$restaurant->closing_time->format('H:i')}}</td>
+          <td>
+            @foreach($restaurant->regular_holidays as $regular_holiday)
+            <span>{{$regular_holiday->day}}</span>
+            @endforeach
+          </td>
+          <td>
+            @foreach($restaurant->categories as $category)
+            <span>{{$category->name}}</span>
+            @endforeach
+          </td>
           <td><a href="{{ route('dashboard.restaurants.edit', $restaurant->id) }}" class="btn btn-primary">編集</a></td>
           <td>
             <form method="POST" action="{{ route('dashboard.restaurants.destroy', $restaurant->id) }}">

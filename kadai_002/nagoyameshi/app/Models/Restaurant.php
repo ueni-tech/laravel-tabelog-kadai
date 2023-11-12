@@ -19,4 +19,9 @@ class Restaurant extends Model
     {
         return $this->belongsToMany(Regular_holiday::class)->withTimestamps();
     }
+
+    protected $casts = [
+        'opening_time' => 'datetime:H:i',
+        'closing_time' => 'datetime:H:i', 
+    ];
 }

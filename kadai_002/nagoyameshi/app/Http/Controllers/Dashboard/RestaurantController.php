@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Restaurant;
 use App\Models\Category;
+use App\Models\Regular_holiday;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -19,13 +20,13 @@ class RestaurantController extends Controller
         $sort_query = [];
         $sorted = '';
 
-        if($request->sort !== null){
+        if ($request->sort !== null) {
             $slices = explode(' ', $request->sort);
             $sort_query[$slices[0]] = $slices[1];
             $sorted = $request->sort;
         }
 
-        if($request->keyword !== null){
+        if ($request->keyword !== null) {
             $keyword = rtrim($request->keyword);
             $total_count = Restaurant::where('name', 'LIKE', "%{$keyword}%")->count();
             $restaurants = Restaurant::where('name', 'LIKE', "%{$keyword}%")->sortable($sort_query)->paginate(10);
@@ -50,9 +51,10 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        $restaurants = Restaurant::all();
+        $categories = Category::all();
+        $regular_holidays = Regular_holiday::all();
 
-        return view('dashboard.restaurants.create', compact('restaurants'));
+        return view('dashboard.restaurants.create', compact('categories', 'regular_holidays'));
     }
 
     /**
@@ -63,22 +65,24 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'postal_code' => 'required',
-            'address' => 'required',
-            'opening_time' => 'required',
-            'closing_time' => 'required'
-        ],
-        [
-            'name.required' => '店舗名を入力してください。',
-            'description.required' => '説明を入力してください。',
-            'postal_code.required' => '郵便番号を入力してください。',
-            'address.required' => '住所を入力してください。',
-            'opening_time.required' => '開店時間を入力してください。',
-            'closing_time.required' => '閉店時間を入力してください。'
-        ]);
+        $request->validate(
+            [
+                'name' => 'required',
+                'description' => 'required',
+                'postal_code' => 'required',
+                'address' => 'required',
+                'opening_time' => 'required',
+                'closing_time' => 'required'
+            ],
+            [
+                'name.required' => '店舗名を入力してください。',
+                'description.required' => '説明を入力してください。',
+                'postal_code.required' => '郵便番号を入力してください。',
+                'address.required' => '住所を入力してください。',
+                'opening_time.required' => '開店時間を入力してください。',
+                'closing_time.required' => '閉店時間を入力してください。'
+            ]
+        );
 
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
@@ -87,7 +91,11 @@ class RestaurantController extends Controller
         $restaurant->address = $request->input('address');
         $restaurant->opening_time = $request->input('opening_time');
         $restaurant->closing_time = $request->input('closing_time');
+        $restaurant->image = 'dummy.jpg';
         $restaurant->save();
+
+        $restaurant->categories()->sync($request->input('category_ids'));
+        $restaurant->regular_holidays()->sync($request->input('regular_holiday_ids'));
 
         return redirect()->route('dashboard.restaurants.index')->with('message', '店舗を登録しました。');
     }
@@ -101,8 +109,9 @@ class RestaurantController extends Controller
     public function edit(Restaurant $restaurant)
     {
         $categories = Category::all();
+        $regular_holidays = Regular_holiday::all();
 
-        return view('dashboard.restaurants.edit', compact('restaurant', 'categories'));
+        return view('dashboard.restaurants.edit', compact('restaurant', 'categories', 'regular_holidays'));
     }
 
     /**
@@ -114,22 +123,24 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'postal_code' => 'required',
-            'address' => 'required',
-            'opening_time' => 'required',
-            'closing_time' => 'required'
-        ],
-        [
-            'name.required' => '店舗名を入力してください。',
-            'description.required' => '説明を入力してください。',
-            'postal_code.required' => '郵便番号を入力してください。',
-            'address.required' => '住所を入力してください。',
-            'opening_time.required' => '開店時間を入力してください。',
-            'closing_time.required' => '閉店時間を入力してください。'
-        ]);
+        $request->validate(
+            [
+                'name' => 'required',
+                'description' => 'required',
+                'postal_code' => 'required',
+                'address' => 'required',
+                'opening_time' => 'required',
+                'closing_time' => 'required'
+            ],
+            [
+                'name.required' => '店舗名を入力してください。',
+                'description.required' => '説明を入力してください。',
+                'postal_code.required' => '郵便番号を入力してください。',
+                'address.required' => '住所を入力してください。',
+                'opening_time.required' => '開店時間を入力してください。',
+                'closing_time.required' => '閉店時間を入力してください。'
+            ]
+        );
 
         $restaurant->name = $request->input('name');
         $restaurant->description = $request->input('description');
@@ -138,6 +149,9 @@ class RestaurantController extends Controller
         $restaurant->opening_time = $request->input('opening_time');
         $restaurant->closing_time = $request->input('closing_time');
         $restaurant->update();
+        
+        $restaurant->categories()->sync($request->input('category_ids'));
+        $restaurant->regular_holidays()->sync($request->input('regular_holiday_ids'));
 
         return redirect()->route('dashboard.restaurants.index')->with('message', '店舗情報を更新しました。');
     }
