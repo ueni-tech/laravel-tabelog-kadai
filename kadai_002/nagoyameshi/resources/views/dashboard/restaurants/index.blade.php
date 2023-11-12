@@ -61,7 +61,7 @@
         @foreach($restaurants as $restaurant)
         <tr>
           <th scope="row">{{$restaurant->id}}</th>
-          <td><img src="{{asset('img/dummy.jpg')}}" class="img-fluid" alt=""></td>
+          <td><img src="{{asset('storage/img/restaurant_images/' . $restaurant->image)}}" class="img-fluid" alt=""></td>
           <td>{{$restaurant->name}}</td>
           <td>{{$restaurant->description}}</td>
           <td>{{$restaurant->postal_code}}</td>

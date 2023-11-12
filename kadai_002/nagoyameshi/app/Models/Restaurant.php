@@ -10,6 +10,10 @@ class Restaurant extends Model
 {
     use HasFactory, Sortable;
 
+    protected $fillable = [
+        'image',
+    ];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class)->withTimestamps();

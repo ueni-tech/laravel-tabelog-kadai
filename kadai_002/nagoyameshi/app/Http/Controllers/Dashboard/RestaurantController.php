@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Regular_holiday;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
 {
@@ -91,7 +92,20 @@ class RestaurantController extends Controller
         $restaurant->address = $request->input('address');
         $restaurant->opening_time = $request->input('opening_time');
         $restaurant->closing_time = $request->input('closing_time');
-        $restaurant->image = 'dummy.jpg';
+        // 画像のアップロード
+        if ($request->hasFile('image')) {
+            // アップロードされたファイル名を取得
+            $file_name = $request->file('image')->getClientOriginalName();
+            // ユニークなファイル名を付与
+            $imageName = time() . '_' . uniqid() . '_' . $file_name;
+            // ユニークなファイル名で保存
+            $request->file('image')->storeAs('public/img/restaurant_images', $imageName);
+        } else {
+            // 画像がない場合はnoimage.jpgを保存
+            $imageName = 'noimage.jpg';
+        }
+        $restaurant->image = $imageName;
+
         $restaurant->save();
 
         $restaurant->categories()->sync($request->input('category_ids'));
@@ -148,8 +162,24 @@ class RestaurantController extends Controller
         $restaurant->address = $request->input('address');
         $restaurant->opening_time = $request->input('opening_time');
         $restaurant->closing_time = $request->input('closing_time');
+
+        // 画像の更新
+        if ($request->hasFile('image')) {
+            // アップロードされたファイル名を取得
+            $file_name = $request->file('image')->getClientOriginalName();
+            // ユニークなファイル名を付与
+            $imageName = time() . '_' . uniqid() . '_' . $file_name;
+            // ユニークなファイル名で保存
+            $request->file('image')->storeAs('public/img/restaurant_images', $imageName);
+            // 以前の画像ファイルが存在する場合は削除
+            if ($restaurant->image !== 'noimage.jpg') {
+                Storage::delete('public/img/restaurant_images/' . $restaurant->image);
+            }
+            $restaurant->image = $imageName;
+        }
+
         $restaurant->update();
-        
+
         $restaurant->categories()->sync($request->input('category_ids'));
         $restaurant->regular_holidays()->sync($request->input('regular_holiday_ids'));
 
