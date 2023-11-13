@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\RestaurantController;
+use App\Http\Controllers\Dashboard\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,5 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function() {
     Route::post('login', [LoginController::class, 'login'])->name('login');
     Route::resource('categories', CategoryController::class)->middleware('auth:admins');
     Route::resource('restaurants', RestaurantController::class)->middleware('auth:admins');
+    Route::resource('company', CompanyController::class)->middleware('auth:admins');
 });
