@@ -4,8 +4,13 @@
 <div class="w-75">
   <h1>会社概要</h1>
   <hr>
+  @if (session('message'))
+  <div class="alert alert-success">
+    {{ session('message') }}
+  </div>
+  @endif
   @foreach($companies as $company)
-  <form method="POST" action="{{route('dashboard.company.update', '$company')}}" class="mb-5" enctype="multipart/form-data">
+  <form method="POST" action="{{route('dashboard.company.update', $company)}}" class="mb-5">
     @csrf
     @method('put')
     <div class="container">

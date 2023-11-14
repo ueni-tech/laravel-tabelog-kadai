@@ -45,17 +45,6 @@ class CompanyController extends Controller
             $company->number_of_employees = $request->input('number_of_employees');
             $company->save();
     
-            return redirect()->route('dashboard.company.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Company $company)
-    {
-        //
+            return redirect()->route('dashboard.company.index')->with('message', '会社情報を更新しました。');
     }
 }

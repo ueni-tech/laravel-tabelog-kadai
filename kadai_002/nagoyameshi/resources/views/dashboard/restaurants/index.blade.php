@@ -35,11 +35,13 @@
   </div>
 
   <div class="table-responsive mt-5">
-  <div>
-    @if (session('message'))
-    <p>{{ session('message') }}</p>
-    @endif
-  </div>
+    <div>
+      @if (session('message'))
+      <div class="alert alert-success">
+        {{ session('message') }}
+      </div>
+      @endif
+    </div>
     <table class="table">
       <thead>
         <tr>
