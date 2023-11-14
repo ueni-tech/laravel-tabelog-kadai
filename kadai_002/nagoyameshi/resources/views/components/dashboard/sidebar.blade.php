@@ -28,10 +28,7 @@
   <h2 class="fs-4">その他</h2>
   <div class="d-flex flex-column">
     <label>
-      <a href="{{route('dashboard.company.index')}}">会社概要確認・編集</a>
+      <a href="{{route('dashboard.company.index')}}">会社概要 確認・編集</a>
     </label>
-  </div>
-  <div class="d-flex flex-column">
-    <label>利用規約確認・更新</label>
   </div>
 </div>
