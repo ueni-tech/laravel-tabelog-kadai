@@ -13,10 +13,10 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">名前</th>
+        <th scope="col">フリガナ</th>
         <th scope="col">メールアドレス</th>
-        <th scope="col">登録日時</th>
-        <th scope="col">更新日時</th>
-        <th scope="col"></th>
+        <th scope="col" style="width: 15%;">登録日時</th>
+        <th scope="col" style="width: 15%;"></th>
       </tr>
     </thead>
     <tbody>
@@ -24,9 +24,9 @@
       <tr>
         <th scope="row">{{ $user->id }}</th>
         <td>{{ $user->name }}</td>
+        <td>{{ $user->furigana }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->created_at }}</td>
-        <td>{{ $user->updated_at }}</td>
         <td>
           <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST">
             @csrf

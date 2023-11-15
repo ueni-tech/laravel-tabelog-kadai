@@ -8,7 +8,9 @@
 
   <h2 class="fs-4">会員管理</h2>
   <div class="d-flex flex-column">
-    <label>会員一覧</label>
+    <label>
+      <a href="{{route('dashboard.users.index')}}">会員一覧</a>
+    </label>
   </div>
 
   <h2 class="fs-4">店舗管理</h2>

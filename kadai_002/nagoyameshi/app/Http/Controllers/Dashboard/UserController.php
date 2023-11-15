@@ -17,6 +17,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        
+        $user->delete();
+        return redirect()->route('dashboard.users.index')->with('flash_message', '会員を削除しました');
     }
 }
