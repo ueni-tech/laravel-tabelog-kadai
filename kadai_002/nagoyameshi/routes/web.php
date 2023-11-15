@@ -5,7 +5,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\RestaurantController;
 use App\Http\Controllers\Dashboard\CompanyController;
-use App\Models\Company;
+use App\Http\Controllers\Dashboard\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +47,6 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function() {
     // CompanyControllerのindexアクションとupdateアクションのルーティングのみを追加
     Route::get('company', [CompanyController::class, 'index'])->middleware('auth:admins')->name('company.index');
     Route::put('company/{company}', [CompanyController::class, 'update'])->middleware('auth:admins')->name('company.update');
+    Route::get('users', [UserController::class, 'index'])->middleware('auth:admins')->name('users.index');
+    Route::post('users/{user}', [UserController::class, 'destroy'])->middleware('auth:admins')->name('users.destroy');
 });
