@@ -8,6 +8,7 @@
     {{ session('flash_message') }}
   </div>
   @endif
+  {{$users->links()}}
   <table class="table table-striped mt-4">
     <thead>
       <tr>
@@ -38,5 +39,6 @@
       @endforeach
     </tbody>
   </table>
+  {{$users->links()}}
 </div>
 @endsection

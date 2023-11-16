@@ -42,6 +42,7 @@
       </div>
       @endif
     </div>
+    {{$restaurants->links()}}
     <table class="table restaurants-table">
       <thead>
         <tr>
