@@ -199,9 +199,9 @@ class RestaurantsSeeder extends Seeder
 
             Restaurant::create([
                 'name'=> $names[$i],
-                'image' => 'noimage.png',
+                'image' => 'noimage.jpg',
                 'postal_code' => $postalCodes[$i],
-                'address' => $addresses[$i],
+                'address' => '愛知県名古屋市' . $addresses[$i],
                 'description' => $faker->paragraph,
                 'opening_time' => $randomOpeningTime,
                 'closing_time' => $randomClosingTime

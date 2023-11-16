@@ -42,7 +42,7 @@
       </div>
       @endif
     </div>
-    <table class="table">
+    <table class="table restaurants-table">
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -65,7 +65,7 @@
           <th scope="row">{{$restaurant->id}}</th>
           <td><img src="{{asset('storage/img/restaurant_images/' . $restaurant->image)}}" class="img-fluid" alt=""></td>
           <td>{{$restaurant->name}}</td>
-          <td>{{$restaurant->description}}</td>
+          <td class="auth__restaurant__description">{{$restaurant->description}}</td>
           <td>{{$restaurant->postal_code}}</td>
           <td>{{$restaurant->address}}</td>
           <td>{{$restaurant->opening_time->format('H:i')}}</td>
