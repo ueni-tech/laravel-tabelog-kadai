@@ -8,29 +8,26 @@
 <div class="container py-4">
   <div class="row">
     <h2>新規掲載店</h2>
-    <div class="row g-3 mb-5">
+    <div class="row row-cols-xl-6 row-cols-md-3 row-cols-2 g-3 mb-5">
 
-      <div class="col-xl-2 col-md-3">
-        <div class="card">
-          <img src="{{asset('/storage/img/restaurant_images/1700120340_6555c7141ddce_thumbnail_shiba.jpg')}}" alt="" class="card-img-top">
-          <div class="card-body">
-            <h5>店名</h5>
-            <p class="card-text">カテゴリ</p>
-            <div>評価</div>
+      @foreach($restaurants as $restaurant)
+      <div class="col">
+        <a href="{{route('restaurants.show', $restaurant)}}" class="card-link">
+          <div class="card">
+            <img src="{{asset('/storage/img/restaurant_images/' . $restaurant->image)}}" alt="" class="card-img-top restaurant-card__img">
+            <div class="card-body">
+              <h5>{{$restaurant->name}}</h5>
+              <div class="mb-1">
+                @foreach($restaurant->categories()->get() as $category)
+                <span class="badge bg-secondary">{{$category->name}}</span>
+                @endforeach
+              </div>
+              <div>評価</div>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
-
-      <div class="col-xl-2 col-md-3">
-        <div class="card">
-          <img src="{{asset('/storage/img/restaurant_images/1700120340_6555c7141ddce_thumbnail_shiba.jpg')}}" alt="" class="card-img-top">
-          <div class="card-body">
-            <h5>店名</h5>
-            <p class="card-text">カテゴリ</p>
-            <div>評価</div>
-          </div>
-        </div>
-      </div>
+      @endforeach
 
     </div>
   </div>

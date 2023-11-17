@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\RestaurantController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,11 @@ use App\Http\Controllers\Dashboard\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     $restaurants = Restaurant::all();
+//     return view('index', compact('restaurants'));
+// });
+Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::get('/terms', function () {
     return view('terms');
@@ -32,13 +35,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:admins')->name('dashboard.index');
 
-// Route::prefix('dashboard')->group(function () {
-//     Route::get('login', [LoginController::class, 'showLoginForm'])->name('dashboard.login');
-//     Route::post('login', [LoginController::class, 'login'])->name('dashboard.login');
-//     Route::resource('categories', CategoryController::class)->middleware('auth:admins');
-//     Route::resource('restaurants', RestaurantController::class)->as('dashboard.restaurants')->middleware('auth:admins');
-// });
-
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function() {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login'])->name('login');
@@ -49,3 +45,5 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function() {
     Route::get('users', [UserController::class, 'index'])->middleware('auth:admins')->name('users.index');
     Route::delete('users/{user}', [UserController::class, 'destroy'])->middleware('auth:admins')->name('users.destroy');
 });
+
+Route::get('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantController::class, 'show'])->name('restaurants.show');

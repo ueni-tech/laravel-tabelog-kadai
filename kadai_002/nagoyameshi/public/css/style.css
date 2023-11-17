@@ -6,6 +6,14 @@ img {
   height: auto;
 }
 
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
 /*--------------------------
 コンテンツ
 ----------------------------*/
@@ -19,4 +27,14 @@ img {
 .fv {
   height: 300px;
   object-fit: cover;
+}
+
+.restaurant-card__img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.card-link {
+  transition: 0.3s;
 }
