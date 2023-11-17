@@ -44,7 +44,6 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function() {
     Route::post('login', [LoginController::class, 'login'])->name('login');
     Route::resource('categories', CategoryController::class)->middleware('auth:admins');
     Route::resource('restaurants', RestaurantController::class)->middleware('auth:admins');
-    // CompanyControllerのindexアクションとupdateアクションのルーティングのみを追加
     Route::get('company', [CompanyController::class, 'index'])->middleware('auth:admins')->name('company.index');
     Route::put('company/{company}', [CompanyController::class, 'update'])->middleware('auth:admins')->name('company.update');
     Route::get('users', [UserController::class, 'index'])->middleware('auth:admins')->name('users.index');
