@@ -1,3 +1,7 @@
+:root {
+  --main-color: rgb(227, 148, 87);
+}
+
 /*--------------------------
 ベーススタイル
 ----------------------------*/
@@ -17,7 +21,7 @@ a:hover {
 /*--------------------------
 コンテンツ
 ----------------------------*/
-/* 共通　*/
+/* 共通 */
 .logo {
   width: 20px;
   height: 20px;
@@ -37,4 +41,15 @@ a:hover {
 
 .card-link {
   transition: 0.3s;
+}
+
+/* レストラン詳細ページ */
+.restaurant-page .nav-tabs .nav-link.active {
+  background-color: var(--main-color);
+}
+
+.restaurant-page .restaurant-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
