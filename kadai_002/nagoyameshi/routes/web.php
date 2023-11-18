@@ -23,7 +23,6 @@ use App\Http\Controllers\IndexController;
 //     $restaurants = Restaurant::all();
 //     return view('index', compact('restaurants'));
 // });
-Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::get('/terms', function () {
     return view('terms');
@@ -31,7 +30,7 @@ Route::get('/terms', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:admins')->name('dashboard.index');
 

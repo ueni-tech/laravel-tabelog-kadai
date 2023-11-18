@@ -24,7 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
+        // 新規掲載順に6店舗を取得
+        $restaurants = Restaurant::orderBy('created_at', 'desc')->take(6)->get();
         return view('index', compact('restaurants'));
     }
 }
