@@ -6,7 +6,7 @@ use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\RestaurantController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +46,6 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function() {
 });
 
 Route::get('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantController::class, 'show'])->name('restaurants.show');
+
+Route::get('/reservations/create/{restaurant}', [ReservationController::class, 'create'])->middleware('auth')->name('reservations.create');
+Route::post('/reservations', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');

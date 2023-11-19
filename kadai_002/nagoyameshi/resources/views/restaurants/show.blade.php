@@ -6,13 +6,18 @@
       <h1>{{$restaurant->name}}</h1>
       <p>★評価</p>
     </div>
+    @if (session('message'))
+    <div class="alert alert-success">
+      {{ session('message') }}
+    </div>
+    @endif
     <div class="mb-2">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a href="{{ route('restaurants.show', $restaurant) }}" class="nav-link active text-white">トップ</a>
+          <a href="{{ route('restaurants.show', $restaurant) }}" class="nav-link active bg-main-color text-white disabled">トップ</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-dark border">予約</a>
+          <a href="{{route('reservations.create', $restaurant)}}" class="nav-link text-dark border">予約</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-dark border">レビュー</a>
