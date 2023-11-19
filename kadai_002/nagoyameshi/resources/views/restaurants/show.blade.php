@@ -66,7 +66,7 @@
             <span class="fw-bold">営業時間</span>
           </div>
           <div class="col">
-            <span>{{$restaurant->opening_time->format('H:i')}} ～ {{$restaurant->closing_time->format('H:i')}}</span>
+            <span>{{$restaurant->opening_time}} ～ {{$restaurant->closing_time}}</span>
           </div>
         </div>
         <div class="row mb-2 pb-2 border-bottom">

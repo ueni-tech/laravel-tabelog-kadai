@@ -46,11 +46,11 @@
       </div>
       <div class="form-inline my-4 row">
         <label for="restaurant-opening-time" class="col-3 d-flex justify-content-start">開店時間</label>
-        <input type="time" id="restaurant-opening-time" name="opening_time" class="form-control" value="{{$restaurant->opening_time->format('H:i')}}">
+        <input type="time" id="restaurant-opening-time" name="opening_time" class="form-control" value="{{$restaurant->opening_time}}">
       </div>
       <div class="form-inline my-4 row">
         <label for="restaurant-closing-time" class="col-3 d-flex justify-content-start">閉店時間</label>
-        <input type="time" id="restaurant-closing-time" name="closing_time" class="form-control" value="{{$restaurant->closing_time->format('H:i')}}">
+        <input type="time" id="restaurant-closing-time" name="closing_time" class="form-control" value="{{$restaurant->closing_time}}">
       </div>
       <div class="form-inline my-4 row">
         <p class="col-3 d-flex justify-content-start">定休日</label>

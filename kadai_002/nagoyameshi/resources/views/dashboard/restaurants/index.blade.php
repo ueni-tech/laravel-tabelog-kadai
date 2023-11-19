@@ -69,8 +69,8 @@
           <td class="auth__restaurant__description">{{$restaurant->description}}</td>
           <td>{{$restaurant->postal_code}}</td>
           <td>{{$restaurant->address}}</td>
-          <td>{{$restaurant->opening_time->format('H:i')}}</td>
-          <td>{{$restaurant->closing_time->format('H:i')}}</td>
+          <td>{{$restaurant->opening_time}}</td>
+          <td>{{$restaurant->closing_time}}</td>
           <td>
             @foreach($restaurant->regular_holidays as $regular_holiday)
             <span>{{$regular_holiday->day}}</span>

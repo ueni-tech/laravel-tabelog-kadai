@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
+use Carbon\Carbon;
 
 class Restaurant extends Model
 {
@@ -29,8 +30,21 @@ class Restaurant extends Model
         return $this->hasMany(Reservation::class);
     }
 
-    protected $casts = [
-        'opening_time' => 'datetime:H:i',
-        'closing_time' => 'datetime:H:i', 
-    ];
+    // opening_time のカスタムアクセサ
+    public function getOpeningTimeAttribute($value)
+    {
+        return $this->createTimeFromFormat($value);
+    }
+
+    // closing_time のカスタムアクセサ
+    public function getClosingTimeAttribute($value)
+    {
+        return $this->createTimeFromFormat($value);
+    }
+
+    // 時間のフォーマットを処理する共通メソッド
+    protected function createTimeFromFormat($value)
+    {
+        return Carbon::createFromFormat('H:i:s', $value)->format('H:i');
+    }
 }
