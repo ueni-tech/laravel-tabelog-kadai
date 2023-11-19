@@ -32,13 +32,13 @@
         <div class="form-group row mb-3">
           <label for="reserved_datetime" class="col-3 col-form-label fw-bold">予約日時</label>
           <div class="col-9">
-            <input type="datetime-local" name="reserved_datetime" id="reserved_datetime" class="form-control">
+            <input type="datetime-local" name="reserved_datetime" id="reserved_datetime" class="form-control" value="{{old('reserved_datetime')}}">
           </div>
         </div>
         <div class="form-group row mb-3">
           <label for="number_of_people" class="col-3 col-form-label fw-bold">人数</label>
           <div class="col-9">
-            <input type="number" name="number_of_people" id="number_of_people" class="form-control">
+            <input type="number" name="number_of_people" id="number_of_people" class="form-control" value="{{old('number_of_people')}}">
           </div>
         </div>
         <div class="text-center">

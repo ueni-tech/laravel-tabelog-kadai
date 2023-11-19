@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
-    public function create(Restaurant $restaurant){
+    public function create(Restaurant $restaurant)
+    {
         return view('reservations.create', compact('restaurant'));
     }
 
@@ -24,15 +25,19 @@ class ReservationController extends Controller
         $request->validate([
             'reserved_datetime' => 'required',
             'number_of_people' => 'required|integer'
-            ]);
+        ]);
 
-        $reservation = new Reservation();
-        $reservation->user_id = Auth::user()->id;
-        $reservation->restaurant_id = $request->input('restaurant_id');
-        $reservation->number_of_people = $request->input('number_of_people');
-        $reservation->reserved_datetime = $request->input('reserved_datetime');
-        $reservation->save();
+        if (strtotime($request->input('reserved_datetime')) < time()) {
+            return redirect()->back()->withErrors(['reserved_datetime' => '予約日時には現在より後の日時を指定してください。']);
+        } else {
+            $reservation = new Reservation();
+            $reservation->user_id = Auth::user()->id;
+            $reservation->restaurant_id = $request->input('restaurant_id');
+            $reservation->number_of_people = $request->input('number_of_people');
+            $reservation->reserved_datetime = $request->input('reserved_datetime');
+            $reservation->save();
 
-        return redirect()->route('restaurants.show', $reservation->restaurant_id);
+            return redirect()->route('restaurants.show', $reservation->restaurant_id);
+        }
     }
 }
