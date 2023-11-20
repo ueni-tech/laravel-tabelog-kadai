@@ -25,25 +25,34 @@ class ReservationController extends Controller
         $restaurantId = $request->input('restaurant_id');
         $restaurant = Restaurant::find($restaurantId);
     
+        // レストランが見つからない場合のエラーハンドリング
         if (!$restaurant) {
-            // レストランが見つからない場合のエラーハンドリング
             return back()->withErrors(['message' => '指定されたレストランが見つかりません。']);
         }
+
         $request->validate([
             'reserved_datetime' => 'required',
             'number_of_people' => 'required|integer'
         ]);
 
-        // 予約日時が過去の場合
+        // 予約日時が過去でないかチェック
         if (new \DateTime() > new \DateTime($request->input('reserved_datetime'))) {
-            return back()->withErrors(['reserved_datetime' => '予約日時は現在より先の日時を指定してください。']);
+            return back()->withInput($request->input())->withErrors(['reserved_datetime' => '予約日時は現在より先の日時を指定してください。']);
         }
 
+        // 予約日時が定休日でないかチェック
+        foreach($restaurant->regular_holidays()->get() as $regular_holiday){
+            $day_of_week = date('w', strtotime($request->input('reserved_datetime')));
+            if($regular_holiday->day_index == $day_of_week){
+                return back()->withInput($request->input())->withErrors(['reserved_datetime' => 'ご希望の予約日時は定休日です。別の日時を指定してください。']);
+            }
+        }
+
+        // 予約日時が営業時間内はチェック
         // リクエストから予約日時を取得し、DateTimeオブジェクトに変換
         $reservedDateTime = new \DateTime($request->input('reserved_datetime'));
 
         // レストランの開店時間と閉店時間を取得し、DateTimeオブジェクトに変換
-        // ここでは、予約日時と同じ日付を使っています
         $openTime = new \DateTime($reservedDateTime->format('Y-m-d') . ' ' . $restaurant->opening_time);
         $closeTime = new \DateTime($reservedDateTime->format('Y-m-d') . ' ' . $restaurant->closing_time);
 
@@ -64,7 +73,7 @@ class ReservationController extends Controller
                 return redirect()->route('restaurants.show', $reservation->restaurant_id)->with('message', '予約が完了しました。');
         } else {
             // 営業時間外
-            return back()->withErrors(['reserved_datetime' => '予約時間は営業時間内にしてください。']);
+            return back()->withInput($request->input())->withErrors(['reserved_datetime' => '予約時間は営業時間内にしてください。']);
         }
     }
 }
