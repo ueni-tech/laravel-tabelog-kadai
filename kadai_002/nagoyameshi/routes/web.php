@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\RestaurantController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,11 @@ Route::get('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantControll
 
 Route::get('/reservations/create/{restaurant}', [ReservationController::class, 'create'])->middleware('auth')->name('reservations.create');
 Route::post('/reservations', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
+
+Route::get('/reviews/{restaurant}', [ReviewController::class, 'index'])->name('reviews.index');
+Route::get('/reviews/create/{restaurant}', [ReviewController::class, 'create'])->middleware('auth')->name('reviews.create');
+Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
+Route::get('/reviews/{review}', [ReviewController::class, 'show'])->name('reviews.show');
+Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->middleware('auth')->name('reviews.edit');
+Route::put('/reviews/{review}', [ReviewController::class, 'update'])->middleware('auth')->name('reviews.update');
+Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware('auth')->name('reviews.destroy');
