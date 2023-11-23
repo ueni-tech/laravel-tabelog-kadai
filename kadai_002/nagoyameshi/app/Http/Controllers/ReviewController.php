@@ -17,7 +17,7 @@ class ReviewController extends Controller
     {
         // 渡ってきた$restaurantを使って、全てのReviewを取得する
         $reviews = $restaurant->reviews;
-        return view('reviews.index', compact('reviews'));
+        return view('reviews.index', compact('reviews', 'restaurant'));
     }
 
     /**
@@ -25,9 +25,9 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Restaurant $restaurant)
     {
-        //
+        return view('reviews.create', compact('restaurant'));
     }
 
     /**
@@ -38,7 +38,26 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $restaurantId = $request->input('restaurant_id');
+        $restaurant = Restaurant::find($restaurantId);
+
+        // レストランが見つからない場合のエラーハンドリング
+        if (!$restaurant) {
+            return back()->withErrors(['message' => '指定されたレストランが見つかりません。']);
+        }
+
+        $request->validate([
+            'content' => 'required',
+        ]);
+
+        $review = new Review();
+        $review->content = $request->input('content');
+        $review->score = $request->input('score');
+        $review->user_id = $request->user()->id;
+        $review->restaurant_id = $restaurantId;
+        $review->save();
+
+        return redirect()->route('reviews.index', compact('restaurant'));
     }
 
     /**

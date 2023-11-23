@@ -10,5 +10,6 @@
 
         @include('components.common.footer')
     </div>
+
 </body>
 </html>

@@ -4,7 +4,10 @@
   <div class="w-50 m-auto py-4">
     <div class="text-center mb-2">
       <h1>{{$restaurant->name}}</h1>
-      <p>★評価</p>
+      <p class="text-center">
+        <span class="star-rating me-1" data-rate="{{round($restaurant->reviews->avg('score') * 2, 0) / 2}}"></span>
+        <span>{{round($restaurant->reviews->avg('score'), 1)}} （{{$restaurant->reviews->count()}}件）</span>
+      </p>
     </div>
     <div class="mb-2">
       <ul class="nav nav-tabs">
@@ -15,7 +18,7 @@
           <a href="{{route('reservations.create', $restaurant)}}" class="nav-link active bg-main-color text-white disabled bg-main">予約</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-dark border">レビュー</a>
+          <a href="{{route('reviews.index', $restaurant)}}" class="nav-link text-dark border">レビュー</a>
         </li>
       </ul>
     </div>
@@ -46,4 +49,4 @@
         </div>
       </form>
     </div>
-@endsection
+    @endsection
