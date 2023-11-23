@@ -124,6 +124,14 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+            
+            // レビューが見つからない場合のエラーハンドリング
+            if (!$review) {
+                return back()->withErrors(['message' => '指定されたレビューが見つかりません。']);
+            }
+    
+            $review->delete();
+    
+            return redirect()->route('reviews.index', $review->restaurant_id)->with('message', 'レビューを削除しました。');
     }
 }
