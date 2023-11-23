@@ -8,6 +8,8 @@ use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\RestaurantController as mainRestaurantController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +60,5 @@ Route::get('/reviews/{review}', [ReviewController::class, 'show'])->name('review
 Route::get('/reviews/{review}/edit/{restaurant}', [ReviewController::class, 'edit'])->middleware('auth')->name('reviews.edit');
 Route::put('/reviews/{review}', [ReviewController::class, 'update'])->middleware('auth')->name('reviews.update');
 Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware('auth')->name('reviews.destroy');
+
+Route::get('restaurants/{restaurant}/favorite', [mainRestaurantController::class, 'favorite'])->middleware('auth')->name('restaurants.favorite');

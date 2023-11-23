@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 use Carbon\Carbon;
+use Overtrue\LaravelFavorite\Traits\Favoriteable;
 
 class Restaurant extends Model
 {
-    use HasFactory, Sortable;
+    use HasFactory, Sortable, Favoriteable;
 
     protected $fillable = [
         'image',

@@ -88,7 +88,13 @@
             <span>{{ $restaurant->categories->implode('name', '、') }}</span>
           </div>
         </div>
-        <div class="btn bg-main-color text-white shadow-sm w-50">♥ お気に入り追加</div>
+        <div class="text-center mt-4">
+          @if(Auth::check()&&$restaurant->isFavoritedBy(Auth::user()))
+          <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn btn-outline-main shadow-sm w-50"><i class="fa fa-heart"></i> お気に入り解除</a>
+          @else
+          <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn bg-main-color shadow-sm text-white w-50"><i class="fa fa-heart"></i> お気に入り</a>
+          @endif
+        </div>
       </div>
     </div>
   </div>
