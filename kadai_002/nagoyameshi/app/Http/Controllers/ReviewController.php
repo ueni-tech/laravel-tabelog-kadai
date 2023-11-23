@@ -77,9 +77,15 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review)
+    public function edit(Review $review, Restaurant $restaurant)
     {
-        //
+            
+            // レビューが見つからない場合のエラーハンドリング
+            if (!$review) {
+                return back()->withErrors(['message' => '指定されたレビューが見つかりません。']);
+            }
+    
+            return view('reviews.edit', compact('review', 'restaurant'));
     }
 
     /**
@@ -91,7 +97,16 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+            
+            $request->validate([
+                'content' => 'required',
+            ]);
+    
+            $review->content = $request->input('content');
+            $review->score = $request->input('score');
+            $review->save();
+    
+            return redirect()->route('reviews.index', $review->restaurant_id)->with('message', 'レビューを更新しました。');
     }
 
     /**

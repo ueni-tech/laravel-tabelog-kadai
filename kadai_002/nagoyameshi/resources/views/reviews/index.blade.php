@@ -32,6 +32,16 @@
     <div class="card mb-3">
       <div class="card-header d-flex justify-content-between">
         <div>{{$review->user->name}}</div>
+        @if ($review->user_id === Auth::id())
+        <div class="d-flex">
+          <a href="{{route('reviews.edit', [$review, $restaurant])}}" class="me-2 text-secondary">編集</a>
+          <form action="{{route('reviews.destroy', $review)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="text-danger">削除</button>
+          </form>
+        </div>
+        @endif
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">

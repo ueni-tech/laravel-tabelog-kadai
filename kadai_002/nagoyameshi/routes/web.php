@@ -55,6 +55,6 @@ Route::get('/reviews/{restaurant}', [ReviewController::class, 'index'])->name('r
 Route::get('/reviews/create/{restaurant}', [ReviewController::class, 'create'])->middleware('auth')->name('reviews.create');
 Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
 Route::get('/reviews/{review}', [ReviewController::class, 'show'])->name('reviews.show');
-Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->middleware('auth')->name('reviews.edit');
+Route::get('/reviews/{review}/edit/{restaurant}', [ReviewController::class, 'edit'])->middleware('auth')->name('reviews.edit');
 Route::put('/reviews/{review}', [ReviewController::class, 'update'])->middleware('auth')->name('reviews.update');
 Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware('auth')->name('reviews.destroy');
