@@ -88,7 +88,7 @@
             <span>{{ $restaurant->categories->implode('name', '、') }}</span>
           </div>
         </div>
-        <div class="btn btn-outline-primary">お気に入りボタン</div>
+        <div class="btn bg-main-color text-white shadow-sm w-50">♥ お気に入り追加</div>
       </div>
     </div>
   </div>
