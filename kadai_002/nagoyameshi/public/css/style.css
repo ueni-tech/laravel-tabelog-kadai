@@ -130,3 +130,9 @@ ul, ol {
   background-color: var(--main-color);
   color: #fff;
 }
+
+/* マイページ */
+.mypage .link-delete {
+  color: #0d6efd;
+  cursor: pointer;
+}

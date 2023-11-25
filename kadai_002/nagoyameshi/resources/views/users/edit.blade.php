@@ -67,11 +67,40 @@
           </div>
         </div>
 
-        <div class="form-group d-flex justify-content-center mt-5">
-          <button type="submit" class="btn bg-main-color text-white shadow-sm col-5 me-3">更新</button>
+        <div class="form-group d-flex justify-content-between mt-5">
+          <button type="submit" class="btn bg-main-color text-white shadow-sm col-5">更新</button>
           <a href="{{route('mypage')}}" class="btn bg-white border-secondary shadow-sm col-5">戻る</a>
         </div>
       </form>
+
+      <div class="d-flex justify-content-start mt-3">
+          <form method="POST" action="{{ route('mypage.destroy') }}">
+            @csrf
+            @method('DELETE')
+            <div>※退会希望の方は<span class="link-delete" data-bs-toggle="modal" data-bs-target="#delete-user-confirm-modal">こちら</span></div>
+
+            <div class="modal fade" id="delete-user-confirm-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"><label>本当に退会しますか？</label></h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="閉じる">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-center">一度退会するとデータはすべて削除され復旧はできません。</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-danger">退会する</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
     </div>
   </div>
 </div>
