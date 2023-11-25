@@ -68,6 +68,7 @@ Route::controller(mainUserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->name('mypage');
     Route::get('users/mypage/edit', 'edit')->name('mypage.edit');
     Route::put('users/mypage', 'update')->name('mypage.update');
+    Route::get('user/mypage/reviews', 'reviews')->name('mypage.reviews');
     Route::get('user/mypage/favorite', 'favorite')->name('mypage.favorite');
     Route::delete('users/mypage/delete', 'destroy')->name('mypage.destroy');
 });

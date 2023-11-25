@@ -66,4 +66,12 @@ class UserController extends Controller
         Auth::user()->delete();
         return redirect('/');
     }
+
+    public function reviews(Request $request)
+    {
+        $user = Auth::user();
+
+        $reviews = $user->reviews()->orderBy('updated_at', 'desc')->paginate(5);
+        return view('users.reviews', compact('user', 'reviews'));
+    }
 }

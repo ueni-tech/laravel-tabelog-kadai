@@ -4,7 +4,7 @@
 <h1>店舗管理</h1>
 <form method="GET" action="{{route('dashboard.restaurants.index')}}" class="form-inline">
   並び替え
-  <select name="sort" onchange="this.form.submint();" class="form-inline ml-2">
+  <select name="sort" onchange="this.form.submit();" class="form-inline ml-2">
     @foreach($sort as $key => $value)
     @if($sort == $value)
     <option value="{{$value}}" selected>{{$key}}</option>
