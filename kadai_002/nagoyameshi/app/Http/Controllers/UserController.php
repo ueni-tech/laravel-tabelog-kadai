@@ -25,7 +25,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
             $user = Auth::user();
             return view('users.edit', compact('user'));
@@ -38,10 +38,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
         $user = Auth::user();
-
         $request->validate([
             'name' => 'required',
             'furigana' => 'required|regex:/^[ァ-ヶー　]+$/u',
@@ -62,7 +61,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy()
     {
         Auth::user()->delete();
         return redirect('/');

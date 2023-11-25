@@ -67,8 +67,10 @@
           </div>
         </div>
 
+        <div>※退会希望の方は<span class="link-delete" data-bs-toggle="modal" data-bs-target="#delete-user-confirm-modal">こちら</span></div>
+        
         <div class="form-group d-flex justify-content-between mt-5">
-          <button type="submit" class="btn bg-main-color text-white shadow-sm col-5">更新</button>
+          <button type="submit" class="btn btn-primary text-white shadow-sm col-5">更新</button>
           <a href="{{route('mypage')}}" class="btn bg-white border-secondary shadow-sm col-5">戻る</a>
         </div>
       </form>
@@ -77,7 +79,6 @@
           <form method="POST" action="{{ route('mypage.destroy') }}">
             @csrf
             @method('DELETE')
-            <div>※退会希望の方は<span class="link-delete" data-bs-toggle="modal" data-bs-target="#delete-user-confirm-modal">こちら</span></div>
 
             <div class="modal fade" id="delete-user-confirm-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog">
