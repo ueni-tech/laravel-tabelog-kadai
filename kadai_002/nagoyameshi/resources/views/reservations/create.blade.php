@@ -15,7 +15,7 @@
           <a href="{{ route('restaurants.show', $restaurant) }}" class="nav-link text-dark border">トップ</a>
         </li>
         <li class="nav-item">
-          <a href="{{route('reservations.create', $restaurant)}}" class="nav-link active bg-main-color text-white disabled bg-main">予約</a>
+          <a href="{{route('reservations.create', $restaurant)}}" class="nav-link active bg-primary text-white disabled bg-main">予約</a>
         </li>
         <li class="nav-item">
           <a href="{{route('reviews.index', $restaurant)}}" class="nav-link text-dark border">レビュー</a>
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="text-center">
-          <button type="submit" class="btn bg-main-color text-white shadow-sm w-50">予約する</button>
+          <button type="submit" class="btn btn-primary text-white shadow-sm w-50">予約する</button>
         </div>
       </form>
     </div>

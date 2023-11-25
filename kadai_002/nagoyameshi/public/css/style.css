@@ -1,7 +1,3 @@
-:root {
-  --main-color: rgb(227, 148, 87);
-}
-
 /*--------------------------
 ベーススタイル
 ----------------------------*/
@@ -28,10 +24,6 @@ ul, ol {
 .logo {
   width: 20px;
   height: 20px;
-}
-
-.bg-main-color {
-  background-color: var(--main-color) !important;
 }
 
 /* トップページ */

@@ -17,7 +17,7 @@
     <div class="mb-2">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a href="{{ route('restaurants.show', $restaurant) }}" class="nav-link active bg-main-color text-white disabled">トップ</a>
+          <a href="{{ route('restaurants.show', $restaurant) }}" class="nav-link active bg-primary text-white disabled">トップ</a>
         </li>
         <li class="nav-item">
           <a href="{{route('reservations.create', $restaurant)}}" class="nav-link text-dark border">予約</a>
@@ -92,7 +92,7 @@
           @if(Auth::check()&&$restaurant->isFavoritedBy(Auth::user()))
           <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn btn-outline-main shadow-sm w-50"><i class="fa fa-heart"></i> お気に入り解除</a>
           @else
-          <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn bg-main-color shadow-sm text-white w-50"><i class="fa fa-heart"></i> お気に入り</a>
+          <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn btn-primary shadow-sm text-white w-50"><i class="fa fa-heart"></i> お気に入り</a>
           @endif
         </div>
       </div>

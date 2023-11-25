@@ -23,7 +23,7 @@
           <a href="{{route('reservations.create', $restaurant)}}" class="nav-link text-dark border">予約</a>
         </li>
         <li class="nav-item">
-          <a href="{{route('reviews.index', $restaurant)}}" class="nav-link active bg-main-color text-white">レビュー</a>
+          <a href="{{route('reviews.index', $restaurant)}}" class="nav-link active bg-primary text-white">レビュー</a>
         </li>
       </ul>
     </div>
@@ -69,7 +69,7 @@
       </div>
 
       <div class="form-group d-flex justify-content-center mb-4">
-        <button type="submit" class="btn bg-main-color text-white shadow-sm w-50">投稿</button>
+        <button type="submit" class="btn btn-primary text-white shadow-sm w-50">投稿</button>
       </div>
     </form>
 
