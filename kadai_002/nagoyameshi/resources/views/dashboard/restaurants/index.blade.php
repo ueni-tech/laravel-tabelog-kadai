@@ -2,36 +2,36 @@
 
 @section('content')
 <h1>店舗管理</h1>
-<form method="GET" action="{{route('dashboard.restaurants.index')}}" class="form-inline">
-  並び替え
-  <select name="sort" onchange="this.form.submit();" class="form-inline ml-2">
-    @foreach($sort as $key => $value)
-    @if($sort == $value)
-    <option value="{{$value}}" selected>{{$key}}</option>
-    @else
-    <option value="{{$value}}">{{$key}}</option>
-    @endif
-    @endforeach
-  </select>
+<form method="GET" action="{{ route('dashboard.restaurants.index')}}" class="form-inline d-flex align-items-center">
+    <span class="me-2">並び替え</span>
+    <select name="sort" onChange="this.form.submit();" class="form-select form-inline ml-2 w-25">
+        @foreach ($sort as $key => $value)
+        @if ($sorted == $value)
+        <option value=" {{ $value}}" selected>{{ $key }}</option>
+        @else
+        <option value=" {{ $value}}">{{ $key }}</option>
+        @endif
+        @endforeach
+    </select>
 </form>
 
 <div class="mt-2">
-  <div class="w-75 m-auto">
+  <div class="w-75">
     <form method="GET" action="{{route('dashboard.restaurants.index')}}">
       <div class="d-flex flex-inline form-group">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center me-2">
           店舗名
         </div>
         <input type="text" id="search-restaurants" name="keyword" value="{{$keyword}}" class="form-control ml-2 w-50">
       </div>
-      <button type="submit" class="btn btn-primary">検索</button>
+      <button type="submit" class="btn btn-primary text-white mt-3">検索</button>
     </form>
   </div>
 
   <div class="d-flex justify-content-between w-75 mt-4">
     <h3>合計{{$total_count}}件</h3>
 
-    <a href="{{route('dashboard.restaurants.create')}}" class="btn btn-primary">+ 新規作成</a>
+    <a href="{{route('dashboard.restaurants.create')}}" class="btn btn-primary text-white">+ 新規作成</a>
   </div>
 
   <div class="table-responsive mt-5">

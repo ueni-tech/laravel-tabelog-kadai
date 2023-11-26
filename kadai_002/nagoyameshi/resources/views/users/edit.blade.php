@@ -68,7 +68,7 @@
         </div>
         
         <div class="form-group d-flex justify-content-between mt-5">
-          <button type="submit" class="btn btn-primary text-white shadow-sm col-5">更新</button>
+          <button type="submit" class="btn btn-primary bg_main text-white shadow-sm col-5">更新</button>
           <a href="{{route('mypage')}}" class="btn bg-white border-secondary shadow-sm col-5">戻る</a>
         </div>
       </form>

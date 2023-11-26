@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" class="mt-3 btn btn-primary w-100">
+          <button type="submit" class="mt-3 btn btn-primary bg_main w-100">
             ログイン
           </button>
         </div>

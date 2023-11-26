@@ -23,7 +23,7 @@
           <a href="{{route('reservations.create', $restaurant)}}" class="nav-link text-dark border">予約</a>
         </li>
         <li class="nav-item">
-          <a href="{{route('reviews.index', $restaurant)}}" class="nav-link active bg-primary text-white disabled">レビュー</a>
+          <a href="{{route('reviews.index', $restaurant)}}" class="nav-link active bg-main text-white disabled">レビュー</a>
         </li>
       </ul>
     </div>
@@ -55,7 +55,7 @@
     @endforeach
 
     <div class="text-center mt-5">
-      <a href="{{route('reviews.create', $restaurant)}}" class="btn btn-primary text-white shadow-sm w-50">レビューを投稿する</a>
+      <a href="{{route('reviews.create', $restaurant)}}" class="btn btn-primary bg_main text-white shadow-sm w-50">レビューを投稿する</a>
     </div>
   </div>
 </div>
