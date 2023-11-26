@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,8 @@ class UserController extends Controller
      */
     public function edit()
     {
-            $user = Auth::user();
-            return view('users.edit', compact('user'));
+        $user = Auth::user();
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -71,7 +72,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        if ($request->sort !== null){
+        if ($request->sort !== null) {
             $sorted = $request->sort;
             $reviews = $user->reviews()->orderBy('updated_at', $sorted)->paginate(5);
             return view('users.reviews', compact('reviews', 'sorted'));
@@ -80,5 +81,14 @@ class UserController extends Controller
             $reviews = $user->reviews()->orderBy('updated_at', 'desc')->paginate(5);
             return view('users.reviews', compact('reviews', 'sorted'));
         }
+    }
+
+    public function favorite()
+    {
+        $user = Auth::user();
+
+        $favorites = $user->favorites(Restaurant::class)->orderBy('updated_at', 'desc')->paginate(5);;
+
+        return view('users.favorites', compact('favorites'));
     }
 }

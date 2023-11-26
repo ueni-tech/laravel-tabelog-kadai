@@ -38,6 +38,13 @@ Colors
   height: 20px;
 }
 
+.table-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 0;
+}
+
 /* トップページ */
 .fv {
   height: 300px;

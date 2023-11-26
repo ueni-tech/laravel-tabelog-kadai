@@ -30,7 +30,7 @@
 
       <hr>
 
-      <a href="#" class="text-black">
+      <a href="{{route('mypage.favorite')}}" class="text-black">
         <div class="container">
           <div class="row justify-content-between align-items-center">
             <div class="col-9 d-flex align-items-center">
@@ -39,7 +39,7 @@
               </div>
               <div class="ms-2 mt-3">
                 <div class="d-flex flex-column">
-                  <span class="fw-bold">お気に入り</span>
+                  <span class="fw-bold">お気に入り店舗</span>
                   <p>お気に入り店舗の一覧</p>
                 </div>
               </div>
