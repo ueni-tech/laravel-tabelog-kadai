@@ -19,6 +19,19 @@
       </div>
       @endif
 
+      <form method="GET" action="{{ route('mypage.reviews')}}" class="d-flex align-items-center mb-3">
+        <span class="me-2">並び替え</span>
+        <select name="sort" onChange="this.form.submit();" class="form-select ml-2 w-50">
+          @if ($sorted == 'desc')
+          <option value="desc" selected>投稿の新しい順</option>
+          <option value="asc">投稿の古い順</option>
+          @else
+          <option value="desc">投稿の新しい順</option>
+          <option value="asc" selected>投稿の古い順</option>
+          @endif
+        </select>
+      </form>
+
       {{$reviews->links()}}
       @foreach ($reviews as $review)
       <div class="card mb-3">

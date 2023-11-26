@@ -71,7 +71,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $reviews = $user->reviews()->orderBy('updated_at', 'desc')->paginate(5);
-        return view('users.reviews', compact('user', 'reviews'));
+        if ($request->sort !== null){
+            $sorted = $request->sort;
+            $reviews = $user->reviews()->orderBy('updated_at', $sorted)->paginate(5);
+            return view('users.reviews', compact('reviews', 'sorted'));
+        } else {
+            $sorted = 'desc';
+            $reviews = $user->reviews()->orderBy('updated_at', 'desc')->paginate(5);
+            return view('users.reviews', compact('reviews', 'sorted'));
+        }
     }
 }
