@@ -28,9 +28,9 @@
               <th scope="col" class="col-1">画像</th>
               <th scope="col">店舗名</th>
               <th scope="col" class="col-2">説明</th>
-              <th scope="col">カテゴリ</th>
+              <th scope="col" class="col-2">カテゴリ</th>
               <th scope="col"></th>
-              <th scope="col" class="col-4"></th>
+              <th scope="col" class="col-3"></th>
             </tr>
           </thead>
           <tbody>
