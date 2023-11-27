@@ -83,12 +83,18 @@ class UserController extends Controller
         }
     }
 
-    public function favorite()
+    public function favorite(Request $request)
     {
         $user = Auth::user();
 
-        $favorites = $user->favorites(Restaurant::class)->orderBy('updated_at', 'desc')->paginate(5);;
-
-        return view('users.favorites', compact('favorites'));
+        if ($request->sort !== null) {
+            $sorted = $request->sort;
+            $favorites = $user->favorites()->orderBy('updated_at', $sorted)->paginate(5);
+            return view('users.favorites', compact('favorites', 'sorted'));
+        } else {
+            $sorted = 'desc';
+            $favorites = $user->favorites()->orderBy('updated_at', 'desc')->paginate(5);
+            return view('users.favorites', compact('favorites', 'sorted'));
+        }
     }
 }
