@@ -97,4 +97,12 @@ class UserController extends Controller
             return view('users.favorites', compact('favorites', 'sorted'));
         }
     }
+
+    public function reservations()
+    {
+        $user = Auth::user();
+        $reservations = $user->reservations()->orderBy('reserved_datetime', 'asc')->paginate(5);
+
+        return view('users.reservations', compact('reservations'));
+    }
 }

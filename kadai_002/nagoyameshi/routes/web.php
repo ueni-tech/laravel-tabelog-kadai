@@ -53,6 +53,8 @@ Route::get('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantControll
 
 Route::get('/reservations/create/{restaurant}', [ReservationController::class, 'create'])->middleware('auth')->name('reservations.create');
 Route::post('/reservations', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
+Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->middleware('auth')->name('reservations.destroy');
+
 
 Route::get('/reviews/{restaurant}', [ReviewController::class, 'index'])->name('reviews.index');
 Route::get('/reviews/create/{restaurant}', [ReviewController::class, 'create'])->middleware('auth')->name('reviews.create');
@@ -70,5 +72,6 @@ Route::controller(mainUserController::class)->group(function () {
     Route::put('users/mypage', 'update')->name('mypage.update');
     Route::get('user/mypage/reviews', 'reviews')->name('mypage.reviews');
     Route::get('user/mypage/favorite', 'favorite')->name('mypage.favorite');
+    Route::get('user/mypage/reservations', 'reservations')->name('mypage.reservations');
     Route::delete('users/mypage/delete', 'destroy')->name('mypage.destroy');
 });

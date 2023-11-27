@@ -76,4 +76,10 @@ class ReservationController extends Controller
             return back()->withInput($request->input())->withErrors(['reserved_datetime' => '予約時間は営業時間内にしてください。']);
         }
     }
+
+    public function destroy(Reservation $reservation)
+    {
+        $reservation->delete();
+        return redirect()->route('mypage.reservations')->with('message', '予約をキャンセルしました。');
+    }
 }

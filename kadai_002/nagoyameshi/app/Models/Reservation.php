@@ -18,4 +18,8 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $casts = [
+        'reserved_datetime' => 'datetime',
+    ];
 }
