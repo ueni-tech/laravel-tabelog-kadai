@@ -23,7 +23,7 @@
           <a href="{{route('reservations.create', $restaurant)}}" class="nav-link text-dark border">予約</a>
         </li>
         <li class="nav-item">
-          <a href="{{route('reviews.index', $restaurant)}}" class="nav-link active bg-main text-white disabled">レビュー</a>
+          <a href="{{route('reviews.index', $restaurant)}}" class="nav-link active bg_main text-white disabled">レビュー</a>
         </li>
       </ul>
     </div>
