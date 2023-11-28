@@ -75,3 +75,7 @@ Route::controller(mainUserController::class)->group(function () {
     Route::get('user/mypage/reservations', 'reservations')->name('mypage.reservations');
     Route::delete('users/mypage/delete', 'destroy')->name('mypage.destroy');
 });
+
+Route::get('/subscription', function () {
+    return view('subscription');
+})->middleware('auth')->name('subscription');
