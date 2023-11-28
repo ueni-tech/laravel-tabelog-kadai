@@ -10,6 +10,6 @@
 
         @include('components.common.footer')
     </div>
-
+    @stack('scripts')
 </body>
 </html>

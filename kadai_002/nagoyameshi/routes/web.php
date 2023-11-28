@@ -77,5 +77,7 @@ Route::controller(mainUserController::class)->group(function () {
 });
 
 Route::get('/subscription', function () {
-    return view('subscription');
+    return view('subscription', [
+        'intent' => auth()->user()->createSetupIntent()
+    ]);
 })->middleware('auth')->name('subscription');

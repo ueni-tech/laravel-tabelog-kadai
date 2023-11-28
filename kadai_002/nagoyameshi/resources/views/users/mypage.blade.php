@@ -99,7 +99,7 @@
 
       <hr>
 
-      <a href="#" class="text-black">
+      <a href="{{route('subscription')}}" class="text-black">
         <div class="container">
           <div class="row justify-content-between align-items-center">
             <div class="col-9 d-flex align-items-center">
