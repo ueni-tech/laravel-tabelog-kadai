@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Cashier\Billable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +12,7 @@ use Overtrue\LaravelFavorite\Traits\Favoriter;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, Favoriter;
+    use HasApiTokens, HasFactory, Notifiable, Favoriter, Billable;
 
     /**
      * The attributes that are mass assignable.
