@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\RestaurantController;
@@ -38,7 +39,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:admins')->name('dashboard.index');
 
-Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function() {
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login'])->name('login');
     Route::resource('categories', CategoryController::class)->middleware('auth:admins');
@@ -81,3 +82,12 @@ Route::get('/subscription', function () {
         'intent' => auth()->user()->createSetupIntent()
     ]);
 })->middleware('auth')->name('subscription');
+
+Route::post('/user/subscribe', function (Request $request) {
+    $request->user()->newSubscription(
+        'default',
+        'price_1OHLtmKhH49tdTK4W8R9S8cJ'
+    )->create($request->paymentMethodId);
+
+    return redirect('/dashboard');
+})->middleware(['auth'])->name('subscribe.post');

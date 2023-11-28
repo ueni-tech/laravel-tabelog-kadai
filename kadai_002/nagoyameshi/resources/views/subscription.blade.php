@@ -19,8 +19,9 @@
 
       <hr class="mb-4">
 
-      <form id="setup-form">
-        <input id="card-holder-name" type="text" placeholder="カード名義人">
+      <form id="setup-form" action="{{ route('subscribe.post')}}" method="post">
+        @csrf
+        <input id="card-holder-name" type="text" placeholder="カード名義人" name="card-holder-name">
         <div id="card-element"></div>
         <button id="card-button" data-secret="{{$intent->client_secret}}" class="btn btn-primary bg_main w-100">サブスクリプション</button>
       </form>
@@ -61,9 +62,23 @@
       console.log(error);
     } else {
       // The card has been verified successfully...
-      console.log(setupIntent)
+      stripePaymentIdHandler(setupIntent.payment_method);
     }
   });
+
+  function stripePaymentIdHandler(paymentMethodId) {
+    // Insert the paymentMethodId into the form so it gets submitted to the server
+    const form = document.getElementById('setup-form');
+
+    const hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'paymentMethodId');
+    hiddenInput.setAttribute('value', paymentMethodId);
+    form.appendChild(hiddenInput);
+
+    // Submit the form
+    form.submit();
+  }
 </script>
 @endpush
 @endsection
