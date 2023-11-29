@@ -11,6 +11,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RestaurantController as mainRestaurantController;
 use App\Http\Controllers\UserController as mainUserController;
+use App\Http\Controllers\SubscriptionController;
 
 
 /*
@@ -77,20 +78,12 @@ Route::controller(mainUserController::class)->group(function () {
     Route::delete('users/mypage/delete', 'destroy')->name('mypage.destroy');
 });
 
-Route::get('/subscription', function () {
-    return view('subscription', [
-        'intent' => auth()->user()->createSetupIntent()
-    ]);
-})->middleware('auth')->name('subscription');
-
-Route::post('/user/subscribe', function (Request $request) {
-    $request->user()->newSubscription(
-        'default',
-        'price_1OHLtmKhH49tdTK4W8R9S8cJ'
-    )->create($request->paymentMethodId);
-
-    return redirect('/dashboard');
-})->middleware(['auth'])->name('subscribe.post');
+Route::controller(SubscriptionController::class)->group(function(){
+    Route::get('subscription', 'index')->middleware('auth')->name('subscription');
+    Route::post('subscription', 'store')->middleware('auth')->name('subscription.post');
+    Route::get('subscription/cancel', 'cancel')->middleware(['auth', 'basic'])->name('subscription.cancel');
+    Route::post('subscription', 'destroy')->middleware(['auth', 'basic'])->name('subscription.delete');
+});
 
 Route::get('/basic', function () {
     return view('basic');
