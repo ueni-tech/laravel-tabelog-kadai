@@ -91,3 +91,7 @@ Route::post('/user/subscribe', function (Request $request) {
 
     return redirect('/dashboard');
 })->middleware(['auth'])->name('subscribe.post');
+
+Route::get('/basic', function () {
+    return view('basic');
+})->middleware(['auth', 'basic'])->name('basic');

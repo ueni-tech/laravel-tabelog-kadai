@@ -7,6 +7,7 @@
 
       <hr>
 
+      @if (auth()->user()->subscribed('default'))
       <a href="{{route('mypage.reviews')}}" class="text-black">
         <div class="container">
           <div class="row justify-content-between align-items-center">
@@ -75,6 +76,7 @@
       </a>
 
       <hr>
+      @endif
 
       <a href="{{route('mypage.edit')}}" class="text-black">
         <div class="container">
@@ -99,6 +101,7 @@
 
       <hr>
 
+      @if (!auth()->user()->subscribed('default'))
       <a href="{{route('subscription')}}" class="text-black">
         <div class="container">
           <div class="row justify-content-between align-items-center">
@@ -109,7 +112,32 @@
               <div class="ms-2 mt-3">
                 <div class="d-flex flex-column">
                   <span class="fw-bold">有料会員登録</span>
-                  <p>新規登録</p>
+                  <p>有料会員登録を開始する</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-1">
+              <i class="fas fa-chevron-right fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <hr>
+      @endif
+
+      @if (auth()->user()->subscribed('default'))
+      <a href="#" class="text-black">
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
+            <div class="col-9 d-flex align-items-center">
+              <div class="me-1 col-3 text-center">
+                <i class="fa-solid fa-credit-card fa-3x"></i>
+              </div>
+              <div class="ms-2 mt-3">
+                <div class="d-flex flex-column">
+                  <span class="fw-bold">クレジットカード情報編集</span>
+                  <p>クレジットカード情報の更新・編集</p>
                 </div>
               </div>
             </div>
@@ -127,12 +155,12 @@
           <div class="row justify-content-between align-items-center">
             <div class="col-9 d-flex align-items-center">
               <div class="me-1 col-3 text-center">
-                <i class="fa-solid fa-credit-card fa-3x"></i>
+                <i class="fa-solid fa-ban fa-3x"></i>
               </div>
               <div class="ms-2 mt-3">
                 <div class="d-flex flex-column">
-                  <span class="fw-bold">お支払い方法</span>
-                  <p>お支払い方法の編集</p>
+                  <span class="fw-bold">有料会員解約</span>
+                  <p>有料会員登録を解約する</p>
                 </div>
               </div>
             </div>
@@ -144,6 +172,7 @@
       </a>
 
       <hr>
+      @endif
 
       <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-black">
         <div class="container">
