@@ -5,7 +5,7 @@
     <div class="w-50">
       <h1 class="text-center mb-3">有料会員解約</h1>
       @if(! $onGracePeriod)
-      <p class="text-center">有料会員を解約すると以下の特典を受けられなくなります。<br>本当に解約してもよろしいですか？</p>
+      <p class="text-center">有料会員を解約すると以下の特典を受けられなくなります。</p>
       <div class="card my-4">
         <div class="card-header text-center">
           有料会員特典
@@ -18,6 +18,7 @@
           <li class="list-group-item">・お支払いはクレジットカードを登録するだけ</li>
         </ul>
       </div>
+      <p class="text-center mb-5">本当に解約してもよろしいですか？</p>
       <div class="text-center">
         <form action="{{route('subscription.delete')}}" method="post">
           @csrf
