@@ -22,9 +22,10 @@ class SubscriptionController extends Controller
         return redirect()->route('mypage');
     }
 
-    function cancel()
+    function cancel(Request $request)
     {
-        return view('users.subscription_cancel');
+        $user = $request->user();
+        return view('users.subscription_cancel', compact('user'));
     }
 
     function destroy(Request $request)
