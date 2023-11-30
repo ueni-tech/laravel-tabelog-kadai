@@ -83,6 +83,7 @@ Route::controller(SubscriptionController::class)->group(function(){
     Route::post('subscription', 'store')->middleware('auth')->name('subscription.post');
     Route::get('subscription/cancel', 'cancel')->middleware(['auth', 'basic'])->name('subscription.cancel');
     Route::post('subscription/cancel', 'destroy')->middleware(['auth', 'basic'])->name('subscription.delete');
+    Route::post('subscription/resume', 'resume')->middleware(['auth', 'basic'])->name('subscription.resume');
 });
 
 Route::get('/basic', function () {
