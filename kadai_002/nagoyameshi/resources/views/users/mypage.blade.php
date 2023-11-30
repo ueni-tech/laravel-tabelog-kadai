@@ -159,8 +159,8 @@
               </div>
               <div class="ms-2 mt-3">
                 <div class="d-flex flex-column">
-                  <span class="fw-bold">有料会員解約</span>
-                  <p>有料会員登録を解約する</p>
+                  <span class="fw-bold">有料会員解約申請</span>
+                  <p>有料会員解約の申請をする</p>
                 </div>
               </div>
             </div>
