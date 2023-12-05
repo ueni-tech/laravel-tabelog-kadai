@@ -18,7 +18,7 @@ class EnsureUserIsSubscribed
     {
         if ($request->user() && !$request->user()->subscribed('default')) {
             // This user is not a paying customer...
-            return redirect('subscription');
+            return redirect('subscription')->with('message', '有料会員限定の機能です。');
         }
 
         return $next($request);

@@ -127,7 +127,7 @@
       @endif
 
       @if (auth()->user()->subscribed('default'))
-      <a href="#" class="text-black">
+      <a href="{{route('subscription.edit')}}" class="text-black">
         <div class="container">
           <div class="row justify-content-between align-items-center">
             <div class="col-9 d-flex align-items-center">
@@ -136,8 +136,8 @@
               </div>
               <div class="ms-2 mt-3">
                 <div class="d-flex flex-column">
-                  <span class="fw-bold">クレジットカード情報編集</span>
-                  <p>クレジットカード情報の更新・編集</p>
+                  <span class="fw-bold">クレジットカード情報</span>
+                  <p>クレジットカード情報の確認・更新</p>
                 </div>
               </div>
             </div>

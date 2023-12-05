@@ -15,8 +15,9 @@ class ReviewController extends Controller
      */
     public function index(Restaurant $restaurant)
     {
-        // 渡ってきた$restaurantを使って、全てのReviewを取得する
-        $reviews = $restaurant->reviews;
+        // 5件ずつレビューを表示
+        $reviews = Review::where('restaurant_id', $restaurant->id)->orderBy('created_at', 'desc')->paginate(5);
+
         return view('reviews.index', compact('reviews', 'restaurant'));
     }
 

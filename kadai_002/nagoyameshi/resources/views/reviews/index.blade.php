@@ -28,7 +28,14 @@
       </ul>
     </div>
 
+    @if (Auth::user()->subscribed('default'))
+    <div class="mt-3">
+      {{$reviews->links()}}
+    </div>
+    @endif
+
     @foreach ($reviews as $review)
+    @if (Auth::user()->subscribed('default'))
     <div class="card mb-3">
       <div class="card-header d-flex justify-content-between">
         <div>{{$review->user->name}}</div>
@@ -52,11 +59,46 @@
         </li>
       </ul>
     </div>
+    @elseif ($loop->iteration <= 3)
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between">
+        <div>{{$review->user->name}}</div>
+        @if ($review->user_id === Auth::id())
+        <div class="d-flex">
+          <a href="{{route('reviews.edit', [$review, $restaurant])}}" class="me-2 text-secondary">編集</a>
+          <form action="{{route('reviews.destroy', $review)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="text-danger">削除</button>
+          </form>
+        </div>
+        @endif
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <span class="star-rating" data-rate="{{$review->score}}"></span>
+        </li>
+        <li class="list-group-item">
+          {{$review->content}}
+        </li>
+      </ul>
+    </div>
+    @endif
     @endforeach
+    @if (Auth::user()->subscribed('default'))
+    {{$reviews->links()}}
+    @endif
 
+    @if (Auth::user()->subscribed('default'))
     <div class="text-center mt-5">
       <a href="{{route('reviews.create', $restaurant)}}" class="btn btn-primary bg_main text-white shadow-sm w-50">レビューを投稿する</a>
     </div>
+    @else
+    <div class="text-center">
+      <p>レビューを全件表示するには<a href="{{route('subscription')}}">有料プランへの登録</a>が必要です。</p>
+    </div>
+    @endif
+
   </div>
 </div>
 

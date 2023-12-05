@@ -53,7 +53,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
 Route::get('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantController::class, 'show'])->name('restaurants.show');
 
-Route::get('/reservations/create/{restaurant}', [ReservationController::class, 'create'])->middleware('auth')->name('reservations.create');
+Route::get('/reservations/create/{restaurant}', [ReservationController::class, 'create'])->middleware(['auth', 'basic'])->name('reservations.create');
 Route::post('/reservations', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
 Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->middleware('auth')->name('reservations.destroy');
 
@@ -81,6 +81,8 @@ Route::controller(mainUserController::class)->group(function () {
 Route::controller(SubscriptionController::class)->group(function(){
     Route::get('subscription', 'index')->middleware('auth')->name('subscription');
     Route::post('subscription', 'store')->middleware('auth')->name('subscription.post');
+    Route::get('subscription/edit', 'edit')->middleware(['auth', 'basic'])->name('subscription.edit');
+    Route::post('subscription/edit', 'update')->middleware(['auth', 'basic'])->name('subscription.update');
     Route::get('subscription/cancel', 'cancel')->middleware(['auth', 'basic'])->name('subscription.cancel');
     Route::post('subscription/cancel', 'destroy')->middleware(['auth', 'basic'])->name('subscription.delete');
     Route::post('subscription/resume', 'resume')->middleware(['auth', 'basic'])->name('subscription.resume');

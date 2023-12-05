@@ -31,6 +31,10 @@ Colors
   border-color: var(--main-color) !important;
 }
 
+.text-color-main {
+  color: var(--main-color) !important;
+}
+
 /*--------------------------
 コンテンツ
 ----------------------------*/
