@@ -38,7 +38,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:admins')->name('dashboard.index');
+Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:admins')->name('dashboard.index');
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -51,22 +51,24 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::delete('users/{user}', [UserController::class, 'destroy'])->middleware('auth:admins')->name('users.destroy');
 });
 
-Route::get('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantController::class, 'show'])->name('restaurants.show');
+Route::controller(mainRestaurantController::class)->group(function () {
+    Route::get('restaurants', 'index')->name('restaurants.index');
+    Route::get('restaurants/{restaurant}', 'show')->name('restaurants.show');
+    Route::get('restaurants/{restaurant}/favorite', 'favorite')->middleware('auth')->name('restaurants.favorite');
+});
 
-Route::get('/reservations/create/{restaurant}', [ReservationController::class, 'create'])->middleware(['auth', 'basic'])->name('reservations.create');
-Route::post('/reservations', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
-Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->middleware('auth')->name('reservations.destroy');
+Route::get('reservations/create/{restaurant}', [ReservationController::class, 'create'])->middleware(['auth', 'basic'])->name('reservations.create');
+Route::post('reservations', [ReservationController::class, 'store'])->middleware('auth')->name('reservations.store');
+Route::delete('reservations/{reservation}', [ReservationController::class, 'destroy'])->middleware('auth')->name('reservations.destroy');
 
 
-Route::get('/reviews/{restaurant}', [ReviewController::class, 'index'])->name('reviews.index');
-Route::get('/reviews/create/{restaurant}', [ReviewController::class, 'create'])->middleware('auth')->name('reviews.create');
-Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
-Route::get('/reviews/{review}', [ReviewController::class, 'show'])->name('reviews.show');
-Route::get('/reviews/{review}/edit/{restaurant}', [ReviewController::class, 'edit'])->middleware('auth')->name('reviews.edit');
-Route::put('/reviews/{review}', [ReviewController::class, 'update'])->middleware('auth')->name('reviews.update');
+Route::get('reviews/{restaurant}', [ReviewController::class, 'index'])->name('reviews.index');
+Route::get('reviews/create/{restaurant}', [ReviewController::class, 'create'])->middleware('auth')->name('reviews.create');
+Route::post('reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
+Route::get('reviews/{review}', [ReviewController::class, 'show'])->name('reviews.show');
+Route::get('reviews/{review}/edit/{restaurant}', [ReviewController::class, 'edit'])->middleware('auth')->name('reviews.edit');
+Route::put('reviews/{review}', [ReviewController::class, 'update'])->middleware('auth')->name('reviews.update');
 Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware('auth')->name('reviews.destroy');
-
-Route::get('restaurants/{restaurant}/favorite', [mainRestaurantController::class, 'favorite'])->middleware('auth')->name('restaurants.favorite');
 
 Route::controller(mainUserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->name('mypage');

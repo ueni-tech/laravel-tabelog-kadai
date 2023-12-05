@@ -5,6 +5,18 @@
   <img src="{{asset('img/fv.jpeg')}}" alt="" class="fv">
 </div>
 
+<div class="bg-light mb-4 py-4">
+  <div class="container">
+    <h2 class="fs-5 mb-3">キーワードから探す</h2>
+    <form action="{{route('restaurants.index')}}" class="w-35" method="get">
+      <div class="input-group shadow-sm">
+        <input type="text" name="keyword" class="form-control" placeholder="店舗名・エリア・カテゴリ">
+        <button type="submit" class="btn btn-primary bg_main shadow-sm">検索</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="container py-4">
   <div class="row">
     <h2>新規掲載店</h2>
