@@ -62,7 +62,7 @@ Route::post('reservations', [ReservationController::class, 'store'])->middleware
 Route::delete('reservations/{reservation}', [ReservationController::class, 'destroy'])->middleware('auth')->name('reservations.destroy');
 
 
-Route::get('reviews/{restaurant}', [ReviewController::class, 'index'])->name('reviews.index');
+Route::get('reviews/{restaurant}', [ReviewController::class, 'index'])->middleware('auth')->name('reviews.index');
 Route::get('reviews/create/{restaurant}', [ReviewController::class, 'create'])->middleware('auth')->name('reviews.create');
 Route::post('reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
 Route::get('reviews/{review}', [ReviewController::class, 'show'])->name('reviews.show');

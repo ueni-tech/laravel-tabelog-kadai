@@ -89,6 +89,7 @@
           </div>
         </div>
         <div class="text-center mt-4">
+          @auth
           @if (Auth::user()->subscribed('default'))
           @if(Auth::check()&&$restaurant->isFavoritedBy(Auth::user()))
           <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn btn-outline-main shadow-sm w-50"><i class="fa fa-heart"></i> お気に入り解除</a>
@@ -98,6 +99,9 @@
           @else
           <h3 class="fs-6"><a href="{{route('subscription')}}">有料会員に登録</a>するとお店を<a href="{{route('subscription')}}" class="text-color-main fw-bold">お気に入り登録</a>できます</h3>
           @endif
+          @else
+          <h3 class="fs-6"><a href="{{route('login')}}">有料会員に登録</a>するとお店を<a href="{{route('login')}}" class="text-color-main fw-bold">お気に入り登録</a>できます</h3>
+          @endauth
         </div>
 
       </div>
