@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Category;
 class RestaurantController extends Controller
 {
     public function index(Request $request)
     {
+        $categories = Category::all();
+
         $sort_query = [];
         $sorted = '';
 
@@ -37,12 +39,21 @@ class RestaurantController extends Controller
             $restaurants = Restaurant::sortable($sort_query)->paginate(5);
         }
 
+        if($request->category_id !== null){
+            $restaurants = Restaurant::whereHas('categories', function ($query) use ($request) {
+                $query->where('category_id', $request->category_id);
+            });
+
+            $total_count = $restaurants->count();
+            $restaurants = $restaurants->sortable($sort_query)->paginate(5);
+        }
+
         $sort = [
             '登録の新しい順' => 'created_at desc',
             '登録の古い順' => 'created_at asc'
         ];
 
-        return view('restaurants.index', compact('restaurants', 'total_count', 'keyword', 'sort', 'sorted'));
+        return view('restaurants.index', compact('restaurants', 'total_count', 'keyword', 'sort', 'sorted', 'categories'));
     }
 
     /**

@@ -18,6 +18,7 @@
 </div>
 
 <div class="container py-4">
+
   <div class="row">
     <h2>新規掲載店</h2>
     <div class="row row-cols-xl-6 row-cols-md-3 row-cols-2 g-3 mb-5">
@@ -40,8 +41,19 @@
         </a>
       </div>
       @endforeach
-
     </div>
   </div>
+
+  <div class="row">
+    <h2 class="mb-3">カテゴリから探す</h2>
+    <div class="mb-5">
+      @foreach($categories as $category)
+        <a href="{{route('restaurants.index', ['category_id' => $category->id])}}" class="btn btn-outline-secondary me-1 mb-2">
+          {{$category->name}}
+        </a>
+      @endforeach
+    </div>
+  </div>
+
 </div>
 @endsection

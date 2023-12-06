@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,12 @@ class HomeController extends Controller
     {
         // 新規掲載順に6店舗を取得
         $restaurants = Restaurant::orderBy('created_at', 'desc')->take(6)->get();
-        return view('index', compact('restaurants'));
+
+        // カテゴリーを全て取得
+        $categories = Category::all();
+
+        
+
+        return view('index', compact('restaurants', 'categories'));
     }
 }
