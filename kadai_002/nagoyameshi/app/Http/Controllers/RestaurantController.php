@@ -32,11 +32,11 @@ class RestaurantController extends Controller
             });
 
             $total_count = $restaurantsQuery->count();
-            $restaurants = $restaurantsQuery->sortable($sort_query)->paginate(5);
+            $restaurants = $restaurantsQuery->sortable($sort_query)->paginate(10);
         } else {
             $keyword = '';
             $total_count = Restaurant::count();
-            $restaurants = Restaurant::sortable($sort_query)->paginate(5);
+            $restaurants = Restaurant::sortable($sort_query)->paginate(10);
         }
 
         if($request->category_id !== null){
@@ -45,7 +45,7 @@ class RestaurantController extends Controller
             });
 
             $total_count = $restaurants->count();
-            $restaurants = $restaurants->sortable($sort_query)->paginate(5);
+            $restaurants = $restaurants->sortable($sort_query)->paginate(10);
         }
 
         $sort = [

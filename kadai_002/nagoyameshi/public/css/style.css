@@ -43,49 +43,8 @@ helper
 }
 
 /*--------------------------
-コンテンツ
+レビューの星
 ----------------------------*/
-/* 共通 */
-.logo {
-  width: 20px;
-  height: 20px;
-}
-
-.table-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 0;
-}
-
-/* トップページ */
-.fv {
-  height: 300px;
-  object-fit: cover;
-}
-
-.restaurant-card__img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-}
-
-.card-link {
-  transition: 0.3s;
-}
-
-/* レストラン詳細ページ */
-.restaurant-page .restaurant-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-.form-check-input:checked {
-  background-color: var(--main-color);
-  border-color: var(--main-color);
-}
-
 .star-rating {
   position: relative;
   z-index: 0;
@@ -152,6 +111,62 @@ helper
 .star-rating[data-rate="0"]:after {
   width: 0%;
 }
+/*--------------------------
+コンテンツ
+----------------------------*/
+/* 共通 */
+.logo {
+  width: 20px;
+  height: 20px;
+}
+
+.table-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 0;
+}
+
+/* トップページ */
+.fv {
+  height: 300px;
+  object-fit: cover;
+}
+
+.restaurant-card__img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.card-link {
+  transition: 0.3s;
+}
+
+/* 店舗検索結果ページ */
+.restaurants_index_description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* 行数 */
+  -webkit-box-orient: vertical;
+  /* テキストの流れ方向 */
+
+}
+
+/* 店舗詳細ページ */
+.restaurant-page .restaurant-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.form-check-input:checked {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
 
 .btn-outline-main {
   border-color: var(--main-color);

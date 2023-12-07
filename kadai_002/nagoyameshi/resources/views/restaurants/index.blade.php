@@ -36,19 +36,36 @@
     </div>
 
     <div class="col">
-      <div class="mb-3">
-        <p class="fs-5 mb-4">{{$total_count}}件の店舗が見つかりました</p>
-        <p class="mb-4">{{$restaurants->firstItem()}}～{{$restaurants->lastItem()}}件を表示</p>
+      <div class="mb-3 d-flex justify-content-between">
+        <span class="fs-5 mb-2">{{$total_count}}件の店舗が見つかりました ({{$restaurants->firstItem()}}～{{$restaurants->lastItem()}}件)</span>
+        <form action="{{route('restaurants.index')}}" method="get">
+          <!-- ここに並び替えフォーム -->
+        </form>
       </div>
       @foreach($restaurants as $restaurant)
-      <div class="card">
-        <div class="card-header">
-          {{$restaurant->name}}
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{$restaurant->description}}</p>
-          <a href="{{route('restaurants.show', $restaurant)}}" class="btn btn-primary">詳細を見る</a>
-        </div>
+      <div class="mb-3">
+        <a href="{{route('restaurants.show', 'restaurant')}}">
+          <div class="card restaurants_index_card">
+            <div class=" row g-0">
+              <div class="col-md-4">
+                <img src="{{asset('/storage/img/restaurant_images/' . $restaurant->image)}}" alt="{{$restaurant->name}}" class="restaurants_index_img">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{$restaurant->name}}</h5>
+                  <span class="small text-secondary">{{ $restaurant->categories->implode('name', '、') }}</span>
+                  <hr>
+                  <div class="mb-1">
+                    <span class="star-rating me-1" data-rate="{{round($restaurant->reviews->avg('score') * 2, 0) / 2}}"></span>
+                    <span>{{round($restaurant->reviews->avg('score'), 1)}} （{{$restaurant->reviews->count()}}件）</span>
+                  </div>
+                  <p class="card-text small restaurants_index_description">{{$restaurant->description}}</p>
+                  <p class="card-text small">住所<br>{{$restaurant->address}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
       @endforeach
       {{$restaurants->appends(['keyword' => request('keyword'), 'category_id' => request('category_id')])->links()}}
