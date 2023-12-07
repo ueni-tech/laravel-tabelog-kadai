@@ -37,7 +37,8 @@
 
     <div class="col">
       <div class="mb-3">
-        <p class="fs-4 mb-3">{{$total_count}}件の店舗が見つかりました</p>
+        <p class="fs-5 mb-4">{{$total_count}}件の店舗が見つかりました</p>
+        <p class="mb-4">{{$restaurants->firstItem()}}～{{$restaurants->lastItem()}}件を表示</p>
       </div>
       @foreach($restaurants as $restaurant)
       <div class="card">
