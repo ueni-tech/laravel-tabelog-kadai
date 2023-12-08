@@ -39,6 +39,12 @@
       <div class="mb-3 d-flex justify-content-between">
         <span class="fs-5 mb-2">{{$total_count}}件の店舗が見つかりました ({{$restaurants->firstItem()}}～{{$restaurants->lastItem()}}件)</span>
         <form action="{{route('restaurants.index')}}" method="get">
+          @if(request('keyword'))
+          <input type="hidden" name="keyword" value="{{request('keyword')}}">
+          @endif
+          @if(request('category_id'))
+          <input type="hidden" name="category_id" value="{{request('category_id')}}">
+          @endif
           <select name="sort" onChange="this.form.submit();" class="form-select form-inline ml-2">
             <option value="">並び替え（デフォルト）</option>
             @foreach ($sort as $key => $value)
