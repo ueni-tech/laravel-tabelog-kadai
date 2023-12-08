@@ -144,6 +144,12 @@ helper
 }
 
 /* 店舗検索結果ページ */
+.restaurants_index_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .restaurants_index_description {
   overflow: hidden;
   text-overflow: ellipsis;
