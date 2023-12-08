@@ -15,11 +15,21 @@ class RestaurantController extends Controller
         $sort_query = [];
         $sorted = '';
 
+
         if ($request->sort !== null) {
             $slices = explode(' ', $request->sort);
             $sort_query[$slices[0]] = $slices[1];
             $sorted = $request->sort;
+
+            if($slices[0] == 'rating'){
+                $restaurants = Restaurant::all();
+                foreach($restaurants as $restaurant){
+                    $restaurant->rating = $restaurant->reviews->avg('score');
+                }
+            }
+            
         }
+
 
         if ($request->keyword !== null) {
             $keyword = rtrim($request->keyword);
@@ -49,8 +59,8 @@ class RestaurantController extends Controller
         }
 
         $sort = [
-            '登録の新しい順' => 'created_at desc',
-            '登録の古い順' => 'created_at asc'
+            '掲載が新しい順' => 'created_at desc',
+            '評価の高い順' => 'rating desc',
         ];
 
         return view('restaurants.index', compact('restaurants', 'total_count', 'keyword', 'sort', 'sorted', 'categories'));

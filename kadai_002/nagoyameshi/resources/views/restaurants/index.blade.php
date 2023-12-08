@@ -39,12 +39,21 @@
       <div class="mb-3 d-flex justify-content-between">
         <span class="fs-5 mb-2">{{$total_count}}件の店舗が見つかりました ({{$restaurants->firstItem()}}～{{$restaurants->lastItem()}}件)</span>
         <form action="{{route('restaurants.index')}}" method="get">
-          <!-- ここに並び替えフォーム -->
+          <select name="sort" onChange="this.form.submit();" class="form-select form-inline ml-2">
+            <option value="">並び替え（デフォルト）</option>
+            @foreach ($sort as $key => $value)
+            @if ($sorted == $value)
+            <option value=" {{$value}}" selected>{{ $key }}</option>
+            @else
+            <option value=" {{$value}}">{{ $key }}</option>
+            @endif
+            @endforeach
+          </select>
         </form>
       </div>
       @foreach($restaurants as $restaurant)
       <div class="mb-3">
-        <a href="{{route('restaurants.show', 'restaurant')}}">
+        <a href="{{route('restaurants.show', $restaurant)}}">
           <div class="card restaurants_index_card">
             <div class=" row g-0">
               <div class="col-md-4">
@@ -54,12 +63,12 @@
                 <div class="card-body">
                   <h5 class="card-title">{{$restaurant->name}}</h5>
                   <span class="small text-secondary">{{ $restaurant->categories->implode('name', '、') }}</span>
-                  <hr>
+                  <hr class="my-1">
                   <div class="mb-1">
                     <span class="star-rating me-1" data-rate="{{round($restaurant->reviews->avg('score') * 2, 0) / 2}}"></span>
                     <span>{{round($restaurant->reviews->avg('score'), 1)}} （{{$restaurant->reviews->count()}}件）</span>
                   </div>
-                  <p class="card-text small restaurants_index_description">{{$restaurant->description}}</p>
+                  <span class="card-text small restaurants_index_description mb-1">{{$restaurant->description}}</span>
                   <p class="card-text small">住所<br>{{$restaurant->address}}</p>
                 </div>
               </div>
