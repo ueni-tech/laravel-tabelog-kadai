@@ -133,6 +133,6 @@ class ReviewController extends Controller
     
             $review->delete();
     
-            return redirect()->route('reviews.index', $review->restaurant_id)->with('message', 'レビューを削除しました。');
+            return back()->with('message', 'レビューを削除しました。');
     }
 }

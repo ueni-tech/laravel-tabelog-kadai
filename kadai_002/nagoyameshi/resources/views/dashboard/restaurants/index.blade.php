@@ -5,6 +5,7 @@
 <form method="GET" action="{{ route('dashboard.restaurants.index')}}" class="form-inline d-flex align-items-center">
     <span class="me-2">並び替え</span>
     <select name="sort" onChange="this.form.submit();" class="form-select form-inline ml-2 w-25">
+        <option value="">並び替え（デフォルト）</option>
         @foreach ($sort as $key => $value)
         @if ($sorted == $value)
         <option value=" {{ $value}}" selected>{{ $key }}</option>
@@ -43,19 +44,16 @@
       @endif
     </div>
     {{$restaurants->links()}}
-    <table class="table restaurants-table">
+    <table class="table dashboard_restaurants_table">
       <thead>
         <tr>
           <th scope="col">ID</th>
           <th scope="col" style="width: 8%;">画像</th>
-          <th scope="col" style="width: 8%;">店舗名</th>
-          <th scope="col" style="width: 13%;">説明</th>
-          <th scope="col">郵便番号</th>
-          <th scope="col" style="width: 12%;">住所</th>
-          <th scope="col">開店時間</th>
-          <th scope="col">閉店時間</th>
+          <th scope="col">店舗名</th>
+          <th scope="col">営業時間</th>
           <th scope="col">定休日</th>
-          <th scope="col" style="width: 10%;">カテゴリ</th>
+          <th scope="col">カテゴリ</th>
+          <th scope="col"></th>
           <th scope="col"></th>
           <th scope="col"></th>
         </tr>
@@ -64,24 +62,29 @@
         @foreach($restaurants as $restaurant)
         <tr>
           <th scope="row">{{$restaurant->id}}</th>
-          <td><img src="{{asset('storage/img/restaurant_images/' . $restaurant->image)}}" class="img-fluid" alt=""></td>
-          <td>{{$restaurant->name}}</td>
-          <td class="auth__restaurant__description">{{$restaurant->description}}</td>
-          <td>{{$restaurant->postal_code}}</td>
-          <td>{{$restaurant->address}}</td>
-          <td>{{$restaurant->opening_time}}</td>
-          <td>{{$restaurant->closing_time}}</td>
+          <td><img src="{{asset('storage/img/restaurant_images/' . $restaurant->image)}}" alt=""></td>
+          <td class="restaurant_name">{{$restaurant->name}}</td>
           <td>
-            @foreach($restaurant->regular_holidays as $regular_holiday)
-            <span>{{$regular_holiday->day}}</span>
-            @endforeach
+            {{$restaurant->opening_time}}<br>{{$restaurant->closing_time}}
+          </td>
+          <td>
+            <span>{{ $restaurant->regular_holidays->implode('day', '、') }}</span>
           </td>
           <td>
             @foreach($restaurant->categories as $category)
+            @if($loop->first)
             <span>{{$category->name}}</span>
+            @else
+            <br><span>{{$category->name}}</span>
+            @endif
             @endforeach
           </td>
-          <td><a href="{{ route('dashboard.restaurants.edit', $restaurant->id) }}" class="btn btn-primary">編集</a></td>
+          <td>
+            <a href="{{ route('dashboard.restaurants.reviews', $restaurant->id) }}" class="btn btn-outline-secondary">レビュー</a>
+          </td>
+          <td>
+            <a href="{{ route('dashboard.restaurants.edit', $restaurant->id) }}" class="btn btn-primary">詳細・編集</a>
+          </td>
           <td>
             <form method="POST" action="{{ route('dashboard.restaurants.destroy', $restaurant->id) }}">
               @csrf

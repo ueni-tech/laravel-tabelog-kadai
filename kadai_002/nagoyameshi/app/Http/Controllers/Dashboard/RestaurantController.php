@@ -198,4 +198,11 @@ class RestaurantController extends Controller
 
         return redirect()->route('dashboard.restaurants.index')->with('message', '店舗を削除しました。');
     }
+
+    public function reviews(Restaurant $restaurant)
+    {
+        $reviews = $restaurant->reviews()->sortable(['created_at' => 'desc'])->paginate(10);
+
+        return view('dashboard.restaurants.reviews', compact('restaurant', 'reviews'));
+    }
 }

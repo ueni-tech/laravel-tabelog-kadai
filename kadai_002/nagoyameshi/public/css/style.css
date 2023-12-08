@@ -127,6 +127,9 @@ helper
   max-width: 0;
 }
 
+/*---------------------
+会員側
+---------------------*/
 /* トップページ */
 .fv {
   height: 300px;
@@ -158,7 +161,6 @@ helper
   /* 行数 */
   -webkit-box-orient: vertical;
   /* テキストの流れ方向 */
-
 }
 
 /* 店舗詳細ページ */
@@ -205,4 +207,12 @@ helper
 
 button#card-button {
   border-radius: 0 0 0.375rem 0.375rem;
+}
+
+/*---------------------
+管理者側
+---------------------*/
+
+.dashboard_restaurants_table .restaurant_name {
+  width: 80px;
 }
