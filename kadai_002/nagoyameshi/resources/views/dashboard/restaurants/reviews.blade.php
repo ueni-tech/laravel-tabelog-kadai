@@ -42,7 +42,7 @@
           </div>
         </div>
         <div>
-          <form action="{{route('reviews.destroy', $review)}}" method="post" class="d-inline">
+          <form action="{{route('reviews.destroy', $review)}}" method="post" class="d-inline" onsubmit="return confirm('本当に削除してもよろしいですか？');">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">削除</button>

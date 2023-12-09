@@ -18,9 +18,8 @@
           <li class="list-group-item">・お支払いはクレジットカードを登録するだけ</li>
         </ul>
       </div>
-      <p class="text-center mb-5">本当に解約してもよろしいですか？</p>
       <div class="text-center">
-        <form action="{{route('subscription.delete')}}" method="post">
+        <form action="{{route('subscription.delete')}}" method="post" onsubmit="return confirm('本当に解約してもよろしいですか？');">
           @csrf
           <button type="submit" class="btn btn-danger w-50">解約</button>
         </form>

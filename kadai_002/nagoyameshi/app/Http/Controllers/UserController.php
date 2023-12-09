@@ -101,7 +101,8 @@ class UserController extends Controller
     public function reservations()
     {
         $user = Auth::user();
-        $reservations = $user->reservations()->orderBy('reserved_datetime', 'asc')->paginate(5);
+        // 予約日時が未来のもののみ取得
+        $reservations = $user->reservations()->where('reserved_datetime', '>', date('Y-m-d H:i:s'))->paginate(5);
 
         return view('users.reservations', compact('reservations'));
     }

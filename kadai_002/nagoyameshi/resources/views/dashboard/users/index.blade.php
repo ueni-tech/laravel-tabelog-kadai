@@ -84,7 +84,7 @@
           <a href="{{route('dashboard.users.show', $user)}}" class="btn btn-sm btn-primary">詳細</a>
         </td>
         <td>
-          <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST">
+          <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-sm btn-danger">削除</button>

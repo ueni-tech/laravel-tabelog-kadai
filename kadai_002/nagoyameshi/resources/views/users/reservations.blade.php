@@ -51,7 +51,7 @@
                 <a href="{{route('restaurants.show', $reservation->restaurant_id)}}" class="btn btn-outline-secondary btn-sm">店舗情報</a>
               </td>
               <td>
-                <form action="{{route('reservations.destroy', $reservation)}}" method="post">
+                <form action="{{route('reservations.destroy', $reservation)}}" method="post" onsubmit="return confirm('本当にキャンセルしてもよろしいですか？');">
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="btn btn-outline-danger btn-sm">キャンセル</button>

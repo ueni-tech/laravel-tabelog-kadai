@@ -71,7 +71,7 @@
               </td>
               <td>
                 @if($restaurant->isFavoritedBy(Auth::user()))
-                <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn btn-outline-main shadow-sm"><i class="fa fa-heart"></i> 解除</a>
+                <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn btn-outline-main shadow-sm" onclick="return confirm('本当に解除してもよろしいですか？');"><i class="fa fa-heart"></i> 解除</a>
                 @else
                 <a href="{{route('restaurants.favorite', $restaurant)}}" class="btn btn-primary bg_main shadow-sm text-white"><i class="fa fa-heart"></i> お気に入り</a>
                 @endif

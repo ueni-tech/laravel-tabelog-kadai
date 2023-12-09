@@ -174,7 +174,7 @@
       <hr>
       @endif
 
-      <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-black">
+      <a href="{{ route('logout') }}" onclick="event.preventDefault(); if(confirm('ログアウトしてもよろしいですか？')) document.getElementById('logout-form').submit();" class="text-black">
         <div class="container">
           <div class="row justify-content-between align-items-center">
             <div class="col-9 d-flex align-items-center">

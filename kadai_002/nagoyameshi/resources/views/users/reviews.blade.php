@@ -61,7 +61,7 @@
             </div>
             <div class="d-flex">
               <a href="{{route('reviews.edit', [$review, $review->restaurant])}}" class="me-2 text-secondary">編集</a>
-              <form action="{{route('reviews.destroy', $review)}}" method="POST">
+              <form action="{{route('reviews.destroy', $review)}}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="text-danger">削除</button>

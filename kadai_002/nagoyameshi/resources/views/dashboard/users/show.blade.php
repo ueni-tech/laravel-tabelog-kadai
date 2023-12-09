@@ -53,7 +53,16 @@
 
   <hr>
 
-  <p><a href="{{route('dashboard.users.index')}}" class="link-secondary">&laquo; 会員一覧に戻る</a></p>
+  <div class="d-flex justify-content-between align-items-center">
+    <div><a href="{{route('dashboard.users.index')}}" class="link-secondary">&laquo; 会員一覧に戻る</a></div>
+    <div>
+      <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-danger">このユーザーを削除する</button>
+      </form>
+    </div>
+  </div>
 
   <div class="mt-4">
     <div class="container border">

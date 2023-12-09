@@ -86,7 +86,7 @@
             <a href="{{ route('dashboard.restaurants.edit', $restaurant->id) }}" class="btn btn-primary btn-sm">詳細・編集</a>
           </td>
           <td>
-            <form method="POST" action="{{ route('dashboard.restaurants.destroy', $restaurant->id) }}">
+            <form method="POST" action="{{ route('dashboard.restaurants.destroy', $restaurant->id) }}" onsubmit="return confirm('本当に削除してもよろしいですか？');">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-danger btn-sm">削除</button>
