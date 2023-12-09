@@ -75,7 +75,7 @@
             <span class="card-title">当月サブスク合計額</span>
           </div>
           <div class="card-body">
-            <p class="card-text text-end"> 円</p>
+            <p class="card-text text-end">{{$total_amount}} 円</p>
           </div>
         </div>
         <div class="card col-4">
