@@ -21,13 +21,12 @@ class RestaurantController extends Controller
             $sort_query[$slices[0]] = $slices[1];
             $sorted = $request->sort;
 
-            if($slices[0] == 'rating'){
-                $restaurants = Restaurant::all();
-                foreach($restaurants as $restaurant){
-                    $restaurant->rating = $restaurant->reviews->avg('score');
-                }
-            }
-            
+            // if($slices[0] == 'rating'){
+            //     $restaurants = Restaurant::all();
+            //     foreach($restaurants as $restaurant){
+            //         $restaurant->rating = $restaurant->reviews->avg('score');
+            //     }
+            // }
         }
 
 
@@ -45,8 +44,19 @@ class RestaurantController extends Controller
             $restaurants = $restaurantsQuery->sortable($sort_query)->paginate(10);
         } else {
             $keyword = '';
+            if($sorted == 'rating desc'){
+                // $restaurants = Restaurant::query();
+                $restaurants = Restaurant::join('reviews', 'restaurants.id', '=', 'reviews.restaurant_id')
+                // レストランのカラムを書く
+                -> groupBy('restaurants.id', 'restaurants.name', 'restaurants.address', 'restaurants.image', 'restaurants.created_at', 'restaurants.updated_at', 'restaurants.opening_time', 'restaurants.closing_time', 'restaurants.average_budget', 'restaurants.number_of_seats', 'restaurants.parking', 'restaurants.smoking', 'restaurants.description', 'restaurants.latitude', 'restaurants.longitude', 'restaurants.created_at', 'restaurants.updated_at')
+                -> orderByDesc('avg(reviews.score)')
+                ->paginate(10);
+                // $restaurants = $restaurants->paginate(10)->orderByDesc('rating');
+            }else{
+                $restaurants = Restaurant::sortable($sort_query)->paginate(10);
+            }
+
             $total_count = Restaurant::count();
-            $restaurants = Restaurant::sortable($sort_query)->paginate(10);
         }
 
         if($request->category_id !== null){
