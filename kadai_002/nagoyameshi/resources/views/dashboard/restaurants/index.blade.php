@@ -3,17 +3,17 @@
 @section('content')
 <h1>店舗管理</h1>
 <form method="GET" action="{{ route('dashboard.restaurants.index')}}" class="form-inline d-flex align-items-center">
-    <span class="me-2">並び替え</span>
-    <select name="sort" onChange="this.form.submit();" class="form-select form-inline ml-2 w-25">
-        <option value="">並び替え（デフォルト）</option>
-        @foreach ($sort as $key => $value)
-        @if ($sorted == $value)
-        <option value=" {{ $value}}" selected>{{ $key }}</option>
-        @else
-        <option value=" {{ $value}}">{{ $key }}</option>
-        @endif
-        @endforeach
-    </select>
+  <span class="me-2">並び替え</span>
+  <select name="sort" onChange="this.form.submit();" class="form-select form-inline ml-2 w-25">
+    <option value="">並び替え（デフォルト）</option>
+    @foreach ($sort as $key => $value)
+    @if ($sorted == $value)
+    <option value=" {{ $value}}" selected>{{ $key }}</option>
+    @else
+    <option value=" {{ $value}}">{{ $key }}</option>
+    @endif
+    @endforeach
+  </select>
 </form>
 
 <div class="mt-2">
@@ -29,12 +29,6 @@
     </form>
   </div>
 
-  <div class="d-flex justify-content-between w-75 mt-4">
-    <h3>合計{{$total_count}}件</h3>
-
-    <a href="{{route('dashboard.restaurants.create')}}" class="btn btn-primary text-white">+ 新規作成</a>
-  </div>
-
   <div class="table-responsive mt-5">
     <div>
       @if (session('message'))
@@ -43,8 +37,14 @@
       </div>
       @endif
     </div>
-    {{$restaurants->links()}}
-    <table class="table dashboard_restaurants_table">
+    <h3>合計{{$total_count}}件</h3>
+    <div class="d-flex justify-content-between mt-4">
+      <div>{{$restaurants->links()}}</div>
+      <div>
+        <a href="{{route('dashboard.restaurants.create')}}" class="btn btn-success text-white">+ 新規店舗登録</a>
+      </div>
+    </div>
+    <table class="table table-striped dashboard_restaurants_table align-middle">
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -80,16 +80,16 @@
             @endforeach
           </td>
           <td>
-            <a href="{{ route('dashboard.restaurants.reviews', $restaurant->id) }}" class="btn btn-outline-secondary">レビュー</a>
+            <a href="{{ route('dashboard.restaurants.reviews', $restaurant->id) }}" class="btn btn-outline-secondary btn-sm">レビュー</a>
           </td>
           <td>
-            <a href="{{ route('dashboard.restaurants.edit', $restaurant->id) }}" class="btn btn-primary">詳細・編集</a>
+            <a href="{{ route('dashboard.restaurants.edit', $restaurant->id) }}" class="btn btn-primary btn-sm">詳細・編集</a>
           </td>
           <td>
             <form method="POST" action="{{ route('dashboard.restaurants.destroy', $restaurant->id) }}">
               @csrf
               @method('DELETE')
-              <button type="submit" class="btn btn-danger">削除</button>
+              <button type="submit" class="btn btn-danger btn-sm">削除</button>
             </form>
         </tr>
         @endforeach

@@ -49,6 +49,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('company', [CompanyController::class, 'index'])->middleware('auth:admins')->name('company.index');
     Route::put('company/{company}', [CompanyController::class, 'update'])->middleware('auth:admins')->name('company.update');
     Route::get('users', [UserController::class, 'index'])->middleware('auth:admins')->name('users.index');
+    Route::get('users/{user}', [UserController::class, 'show'])->middleware('auth:admins')->name('users.show');
     Route::delete('users/{user}', [UserController::class, 'destroy'])->middleware('auth:admins')->name('users.destroy');
 });
 

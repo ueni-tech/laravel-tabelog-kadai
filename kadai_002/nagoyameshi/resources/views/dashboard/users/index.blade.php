@@ -32,7 +32,7 @@
           <input type="text" name="name" value="{{$name}}" class="form-control">
         </div>
         <div class="col">
-          <button type="submit" class="btn btn-primary text-white">検索</button>
+          <button type="submit" class="btn btn-sm btn-primary text-white">検索</button>
         </div>
       </div>
     </form>
@@ -45,11 +45,12 @@
           <input type="text" name="email" value="{{$email}}" class="form-control">
         </div>
         <div class="col">
-          <button type="submit" class="btn btn-primary text-white">検索</button>
+          <button type="submit" class="btn btn-sm btn-primary text-white">検索</button>
         </div>
       </div>
     </form>
   </div>
+  <hr>
   {{$users->links()}}
   <table class="table table-striped mt-4 align-middle">
     <thead>
@@ -58,8 +59,8 @@
         <th scope="col">名前</th>
         <th scope="col">フリガナ</th>
         <th scope="col">メールアドレス</th>
-        <th scope="col" style="width: 15%;">登録日時</th>
-        <th scope="col">ステータス</th>
+        <th scope="col">登録日時</th>
+        <th scope="col" style="width: 15%;">ステータス</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -80,13 +81,13 @@
           @endif
         </td>
         <td>
-          <a href="#" class="btn btn-primary">詳細</a>
+          <a href="{{route('dashboard.users.show', $user)}}" class="btn btn-sm btn-primary">詳細</a>
         </td>
         <td>
           <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger">削除</button>
+            <button type="submit" class="btn btn-sm btn-danger">削除</button>
           </form>
         </td>
       </tr>

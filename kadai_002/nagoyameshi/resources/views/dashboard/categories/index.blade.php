@@ -1,17 +1,17 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="w-75 m-auto">
+<div class="w-50 m-auto">
   <form action="{{ route('dashboard.categories.store') }}" method="POST">
     @csrf
-    <div class="form-group">
-      <label for="category-name">カテゴリ名</label>
-      <input type="text" name="name" id="category-name" class="form-control">
+    <label for="category-name">カテゴリ新規作成</label>
+    <div class="input-group mt-2">
+      <input type="text" name="name" id="category-name" class="form-control" placeholder="カテゴリ名">
+      <button type="submit" class="btn btn-sm btn-success">新規作成</button>
     </div>
-    <button type="submit" class="btn btn-primary">+ 新規作成</button>
   </form>
 
-  <table class="table mt-5">
+  <table class="table table-striped mt-5 align-middle">
     <thead>
       <tr>
         <th scope="col" class="w-25">ID</th>
@@ -26,13 +26,13 @@
         <th scope="row">{{ $category->id }}</th>
         <td>{{ $category->name }}</td>
         <td>
-          <a href="{{ route('dashboard.categories.edit', $category) }}" class="btn btn-secondary">編集</a>
+          <a href="{{ route('dashboard.categories.edit', $category) }}" class="btn btn-sm btn-secondary">編集</a>
         </td>
         <td>
           <form action="{{ route('dashboard.categories.destroy', $category) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger">削除</button>
+            <button type="submit" class="btn btn-sm btn-danger">削除</button>
           </form>
         </td>
         @endforeach

@@ -37,6 +37,17 @@ class UserController extends Controller
         return view('dashboard.users.index', compact('users', 'total_count', 'name', 'email'));
     }
 
+    public function show(User $user)
+    {
+        $total_count = User::count();
+        $name = null;
+        $email = null;
+
+        $reviews = $user->reviews()->sortable()->paginate(5);
+
+        return view('dashboard.users.show', compact('user', 'total_count', 'name', 'email', 'reviews'));
+    }
+
     public function destroy(User $user)
     {
         $user->delete();
