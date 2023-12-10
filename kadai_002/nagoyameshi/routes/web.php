@@ -43,6 +43,7 @@ Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'index
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [LoginController::class, 'login'])->name('login');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('categories', CategoryController::class)->middleware('auth:admins');
     Route::resource('restaurants', RestaurantController::class)->middleware('auth:admins');
     Route::get('restaurants/{restaurant}/reviews', [RestaurantController::class, 'reviews'])->middleware('auth:admins')->name('restaurants.reviews');
