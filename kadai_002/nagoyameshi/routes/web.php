@@ -74,13 +74,13 @@ Route::put('reviews/{review}', [ReviewController::class, 'update'])->middleware(
 Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware(['auth', 'auth:admins'])->name('reviews.destroy');
 
 Route::controller(mainUserController::class)->group(function () {
-    Route::get('users/mypage', 'mypage')->name('mypage');
-    Route::get('users/mypage/edit', 'edit')->name('mypage.edit');
-    Route::put('users/mypage', 'update')->name('mypage.update');
-    Route::get('user/mypage/reviews', 'reviews')->name('mypage.reviews');
-    Route::get('user/mypage/favorite', 'favorite')->name('mypage.favorite');
-    Route::get('user/mypage/reservations', 'reservations')->name('mypage.reservations');
-    Route::delete('users/mypage/delete', 'destroy')->name('mypage.destroy');
+    Route::get('users/mypage', 'mypage')->middleware('auth')->name('mypage');
+    Route::get('users/mypage/edit', 'edit')->middleware('auth')->name('mypage.edit');
+    Route::put('users/mypage', 'update')->middleware('auth')->name('mypage.update');
+    Route::get('user/mypage/reviews', 'reviews')->middleware('auth')->name('mypage.reviews');
+    Route::get('user/mypage/favorite', 'favorite')->middleware('auth')->name('mypage.favorite');
+    Route::get('user/mypage/reservations', 'reservations')->middleware('auth')->name('mypage.reservations');
+    Route::delete('users/mypage/delete', 'destroy')->middleware('auth')->name('mypage.destroy');
 });
 
 Route::controller(SubscriptionController::class)->group(function(){
