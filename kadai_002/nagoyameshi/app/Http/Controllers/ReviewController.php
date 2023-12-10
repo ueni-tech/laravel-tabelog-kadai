@@ -49,6 +49,9 @@ class ReviewController extends Controller
 
         $request->validate([
             'content' => 'required',
+        ],
+        [
+            'content.required' => '感想を入力してください。',
         ]);
 
         $review = new Review();
@@ -108,6 +111,9 @@ class ReviewController extends Controller
 
         $request->validate([
             'content' => 'required',
+        ],
+        [
+            'content.required' => '感想を入力してください。',
         ]);
 
         $review->content = $request->input('content');

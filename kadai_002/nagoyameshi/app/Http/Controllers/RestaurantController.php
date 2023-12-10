@@ -28,15 +28,6 @@ class RestaurantController extends Controller
         if ($request->keyword !== null) {
             $keyword = rtrim($request->keyword);
 
-            // $restaurantsQuery = Restaurant::where(function ($query) use ($keyword) {
-            //     $query->where('name', 'LIKE', "%{$keyword}%")
-            //         ->orWhere('address', 'LIKE', "%{$keyword}%");
-            // })->orWhereHas('categories', function ($query) use ($keyword) {
-            //     $query->where('name', 'LIKE', "%{$keyword}%");
-            // });
-
-            // $total_count = $restaurantsQuery->count();
-
             if ($sorted == 'rating desc') {
                 $restaurants = Restaurant::select('restaurants.*', DB::raw('AVG(reviews.score) as average_score'))
                 ->leftjoin('reviews', 'restaurants.id', '=', 'reviews.restaurant_id')
@@ -77,11 +68,6 @@ class RestaurantController extends Controller
         }
 
         if ($request->category_id !== null) {
-            // $restaurants = Restaurant::whereHas('categories', function ($query) use ($request) {
-            //     $query->where('category_id', $request->category_id);
-            // });
-
-            
 
             if ($sorted == 'rating desc') {
                 $restaurants = Restaurant::select('restaurants.*', DB::raw('AVG(reviews.score) as average_score'))
@@ -102,15 +88,6 @@ class RestaurantController extends Controller
             }
 
         }
-
-        // if ($sorted == 'rating desc') {
-        //     $restaurants = Restaurant::select('restaurants.*', DB::raw('AVG(reviews.score) as average_score'))
-        //         ->leftjoin('reviews', 'restaurants.id', '=', 'reviews.restaurant_id')
-        //         // レストランのカラムを書く
-        //         ->groupBy('restaurants.id', 'restaurants.name', 'restaurants.address', 'restaurants.postal_code', 'restaurants.image', 'restaurants.created_at', 'restaurants.updated_at', 'restaurants.opening_time', 'restaurants.closing_time', 'restaurants.description')
-        //         ->orderByDesc('average_score')
-        //         ->paginate(10);
-        // }
 
         $sort = [
             '掲載が新しい順' => 'created_at desc',

@@ -46,6 +46,13 @@ class UserController extends Controller
             'name' => 'required',
             'furigana' => 'required|regex:/^[ァ-ヶー　]+$/u',
             'email' => 'required|email'
+        ],
+        [
+            'name.required' => '名前を入力してください。',
+            'furigana.required' => 'フリガナを入力してください。',
+            'furigana.regex' => 'フリガナは全角カタカナで入力してください。',
+            'email.required' => 'メールアドレスを入力してください。',
+            'email.email' => 'メールアドレスを正しく入力してください。'
         ]);
 
         $user->name = $request->input('name');
