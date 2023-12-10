@@ -5,7 +5,7 @@
     <div class="col-xl-3 col-lg-4 col-md-12">
       <form action="{{route('restaurants.index')}}" class="w-100 mb-3" method="get">
         <div class="input-group shadow-sm">
-          <input type="text" name="keyword" class="form-control" placeholder="店舗名・エリア・カテゴリ">
+          <input type="text" name="keyword" value="{{$keyword}}" class="form-control" placeholder="店舗名・エリア・カテゴリ">
           <button type="submit" class="btn btn-primary bg_main shadow-sm">検索</button>
         </div>
       </form>
