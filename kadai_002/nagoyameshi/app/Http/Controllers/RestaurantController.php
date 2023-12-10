@@ -36,11 +36,40 @@ class RestaurantController extends Controller
             });
 
             $total_count = $restaurantsQuery->count();
-            $restaurants = $restaurantsQuery->sortable($sort_query)->paginate(10);
+
+            if ($sorted == 'rating desc') {
+                $restaurants = Restaurant::select('restaurants.*', DB::raw('AVG(reviews.score) as average_score'))
+                ->leftjoin('reviews', 'restaurants.id', '=', 'reviews.restaurant_id')
+                ->where(function ($query) use ($keyword) {
+                    $query->where('name', 'LIKE', "%{$keyword}%")
+                        ->orWhere('address', 'LIKE', "%{$keyword}%");
+                })->orWhereHas('categories', function ($query) use ($keyword) {
+                    $query->where('name', 'LIKE', "%{$keyword}%");
+                })
+                ->groupBy('restaurants.id', 'restaurants.name', 'restaurants.address', 'restaurants.postal_code', 'restaurants.image', 'restaurants.created_at', 'restaurants.updated_at', 'restaurants.opening_time', 'restaurants.closing_time', 'restaurants.description')
+                ->orderByDesc('average_score')
+                ->paginate(10);
+            } else {
+                $restaurants = Restaurant::where(function ($query) use ($keyword) {
+                    $query->where('name', 'LIKE', "%{$keyword}%")
+                        ->orWhere('address', 'LIKE', "%{$keyword}%");
+                })->orWhereHas('categories', function ($query) use ($keyword) {
+                    $query->where('name', 'LIKE', "%{$keyword}%");
+                })->sortable($sort_query)->paginate(10);
+            }
         } else {
             $keyword = '';
 
-            $restaurants = Restaurant::sortable($sort_query)->paginate(10);
+            if ($sorted == 'rating desc') {
+                $restaurants = Restaurant::select('restaurants.*', DB::raw('AVG(reviews.score) as average_score'))
+                    ->leftjoin('reviews', 'restaurants.id', '=', 'reviews.restaurant_id')
+                    ->groupBy('restaurants.id', 'restaurants.name', 'restaurants.address', 'restaurants.postal_code', 'restaurants.image', 'restaurants.created_at', 'restaurants.updated_at', 'restaurants.opening_time', 'restaurants.closing_time', 'restaurants.description')
+                    ->orderByDesc('average_score')
+                    ->paginate(10);
+            } else {
+                $restaurants = Restaurant::sortable($sort_query)->paginate(10);
+            }
+
             $total_count = Restaurant::count();
         }
 
