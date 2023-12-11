@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<div class="subscription py-4">
+<div class="container pt-4">
+  {{ Breadcrumbs::render('subscription') }}
+</div>
+<div class="subscription pb-4">
   <div class="container d-flex justify-content-center mt-3">
     <div class="w-50">
       @if (session('message'))

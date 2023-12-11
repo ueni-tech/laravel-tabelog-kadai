@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('content')
-<div class="mypage py-4">
-  <div class="container d-flex justify-content-center mt-3">
-    <div class="w-50">
+<div class="container pt-4">
+  {{ Breadcrumbs::render('mypage') }}
+</div>
+<div class="mypage pb-4">
+  <div class="container mt-3">
+    <div class="w-75 m-auto">
       <h1>マイページ</h1>
-
       <hr>
-
       @if (auth()->user()->subscribed('default'))
       <a href="{{route('mypage.reviews')}}" class="text-black">
         <div class="container">

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<div class="container mt-5">
+<div class="container pt-4">
   {{ Breadcrumbs::render('restaurants.index') }}
+</div>
+<div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-xl-3 col-lg-4 col-md-12">
       <form action="{{route('restaurants.index')}}" class="w-100 mb-3" method="get">

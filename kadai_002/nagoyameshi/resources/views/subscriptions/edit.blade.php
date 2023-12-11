@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<div class="mypage py-4">
+<div class="container pt-4">
+  {{ Breadcrumbs::render('subscription.edit') }}
+</div>
+<div class="mypage pb-4">
   <div class="w-50 m-auto mt-3">
     <div>
       <h1 class="text-center mb-4">クレジットカード情報</h1>

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<div class="mypage py-4">
+<div class="container pt-4">
+  {{ Breadcrumbs::render('mypage.reviews') }}
+</div>
+<div class="mypage pb-4">
   <div class="container mt-3">
     <div class="w-50 m-auto">
       <h1 class="text-center mb-4">あなたのレビュー</h1>

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<div class="subscription py-4">
+<div class="container pt-4">
+  {{ Breadcrumbs::render('subscription.cancel') }}
+</div>
+<div class="subscription pb-4">
   <div class="container d-flex justify-content-center mt-3">
     <div class="w-50">
       <h1 class="text-center mb-3">有料会員解約申請</h1>
