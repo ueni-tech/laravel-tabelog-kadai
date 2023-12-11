@@ -63,3 +63,15 @@ Breadcrumbs::for('subscription', function ($trail) {
   $trail->parent('mypage');
   $trail->push('有料会員登録', route('subscription'));
 });
+
+// トップ > 会社概要
+Breadcrumbs::for('company.index', function ($trail) {
+  $trail->parent('home');
+  $trail->push('会社概要', route('company.index'));
+});
+
+// トップ > 利用規約
+Breadcrumbs::for('terms', function ($trail) {
+  $trail->parent('home');
+  $trail->push('利用規約', route('terms'));
+});

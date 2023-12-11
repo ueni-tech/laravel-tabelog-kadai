@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="d-flex justify-content-center mb-1">
-      <a href="#" class="link-secondary me-3">会社概要</a>
+      <a href="{{route('company.index')}}" class="link-secondary me-3">会社概要</a>
       <a href="{{url('/terms')}}" class="link-secondary">利用規約</a>
     </div>
     <p class="text-muted text-center small mb-0">&copy; NAGOYAMESHI All rights reserved.</p>

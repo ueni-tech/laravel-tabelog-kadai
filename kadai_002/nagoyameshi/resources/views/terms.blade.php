@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="w-50 m-auto">
+<div class="container pt-4">
+  {{ Breadcrumbs::render('terms') }}
+</div>
+<div class="w-75 m-auto py-4">
   <h1 class="mb-4 text-center">利用規約</h1>
 
   <div class="mb-4 terms">

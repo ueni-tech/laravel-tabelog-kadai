@@ -32,7 +32,7 @@ use App\Http\Controllers\SubscriptionController;
 
 Route::get('/terms', function () {
     return view('terms');
-});
+})->name('terms');
 
 Auth::routes();
 
@@ -93,6 +93,4 @@ Route::controller(SubscriptionController::class)->group(function(){
     Route::post('subscription/resume', 'resume')->middleware(['auth', 'basic'])->name('subscription.resume');
 });
 
-Route::get('/basic', function () {
-    return view('basic');
-})->middleware(['auth', 'basic'])->name('basic');
+Route::get('company', [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');

@@ -20,6 +20,8 @@ a:hover {
 
 ul,
 ol {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -215,6 +217,11 @@ helper
 
 button#card-button {
   border-radius: 0 0 0.375rem 0.375rem;
+}
+
+/* 利用規約 */
+.terms h2 {
+  margin-top: 1em;
 }
 
 /*---------------------
