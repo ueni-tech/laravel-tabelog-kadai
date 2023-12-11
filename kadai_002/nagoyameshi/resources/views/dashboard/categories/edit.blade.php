@@ -10,9 +10,11 @@
       @method('PUT')
       <div class="form-group">
         <label for="category-name">カテゴリ名</label>
-        <input type="text" name="name" id="category-name" class="form-control" value="{{ old('name', $category->name) }}">
+        <div class="mt-2">
+          <input type="text" name="name" id="category-name" class="form-control mb-4" value="{{ old('name', $category->name) }}">
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">更新</button>
+      <button type="submit" class="btn btn-primary w-25">更新</button>
     </form>
   </div>
 </div>
