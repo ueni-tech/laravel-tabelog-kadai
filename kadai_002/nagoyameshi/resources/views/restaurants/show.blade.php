@@ -2,6 +2,7 @@
 @section('content')
 <div class="restaurant-page">
   <div class="w-50 m-auto py-4">
+    {{ Breadcrumbs::render('restaurants.show', $restaurant) }}
     <div class="text-center mb-2">
       <h1>{{$restaurant->name}}</h1>
       <p class="text-center">
