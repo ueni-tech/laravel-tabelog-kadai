@@ -2,8 +2,22 @@
 
 @section('content')
 <div class="w-85 m-auto">
-  <div class="col-6">
+  <div class="col-8">
     <h2 class="mb-4">カテゴリ一覧</h2>
+      @if (session('message'))
+      <div class="alert alert-success">
+        {{ session('message') }}
+      </div>
+      @endif
+      @if($errors->any())
+      <div class="alert alert-danger">
+        <ul class="mb-0">
+          @foreach($errors->all() as $error)
+          <li>{{$error}}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
     <form action="{{ route('dashboard.categories.store') }}" method="POST">
       @csrf
       <label for="category-name">カテゴリ新規作成</label>
@@ -13,7 +27,7 @@
       </div>
     </form>
 
-    <table class="table table-striped mt-5 align-middle">
+    <table class="table table-striped mt-5 align-middle w-85">
       <thead>
         <tr>
           <th scope="col" class="w-25">ID</th>

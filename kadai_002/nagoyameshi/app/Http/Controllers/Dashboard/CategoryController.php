@@ -28,11 +28,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories',
+            ],
+            [
+                'name.required' => 'カテゴリ名を入力してください。',
+                'name.string' => 'カテゴリ名は文字列で入力してください。',
+                'name.max' => 'カテゴリ名は255文字以内で入力してください。',
+                'name.unique' => 'そのカテゴリ名は既に登録されています。',
+            ]);
+
         $category = new Category();
         $category->name = $request->input('name');
         $category->save();
 
-        return to_route('dashboard.categories.index');
+        return to_route('dashboard.categories.index')->with('message', 'カテゴリを作成しました。');
     }
 
     /**
@@ -71,6 +81,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return to_route('dashboard.categories.index');
+        return to_route('dashboard.categories.index')->with('message', 'カテゴリを削除しました。');
     }
 }
