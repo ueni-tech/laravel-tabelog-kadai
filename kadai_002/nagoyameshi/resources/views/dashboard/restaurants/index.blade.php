@@ -1,33 +1,42 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<h1>店舗管理</h1>
-<form method="GET" action="{{ route('dashboard.restaurants.index')}}" class="form-inline d-flex align-items-center">
-  <span class="me-2">並び替え</span>
-  <select name="sort" onChange="this.form.submit();" class="form-select form-inline ml-2 w-25">
-    <option value="">並び替え（デフォルト）</option>
-    @foreach ($sort as $key => $value)
-    @if ($sorted == $value)
-    <option value=" {{ $value}}" selected>{{ $key }}</option>
-    @else
-    <option value=" {{ $value}}">{{ $key }}</option>
-    @endif
-    @endforeach
-  </select>
-</form>
-
-<div class="mt-2">
-  <div class="w-75">
-    <form method="GET" action="{{route('dashboard.restaurants.index')}}">
-      <div class="d-flex flex-inline form-group">
-        <div class="d-flex align-items-center me-2">
-          店舗名
-        </div>
-        <input type="text" id="search-restaurants" name="keyword" value="{{$keyword}}" class="form-control ml-2 w-50">
+<div class="w-85 m-auto">
+  <h2 class="mb-4">店舗一覧</h2>
+  <div class="col-md-6">
+    <form method="GET" action="{{ route('dashboard.restaurants.index')}}" class="form-inline d-flex align-items-center">
+      <div class="col-4">
+        <span class="me-2">並び替え</span>
       </div>
-      <button type="submit" class="btn btn-primary text-white mt-3">検索</button>
+      <div class="col">
+        <select name="sort" onChange="this.form.submit();" class="form-select form-inline">
+          <option value="">並び替え（デフォルト）</option>
+          @foreach ($sort as $key => $value)
+          @if ($sorted == $value)
+          <option value=" {{$value}}" selected>{{ $key }}</option>
+          @else
+          <option value=" {{$value}}">{{ $key }}</option>
+          @endif
+          @endforeach
+        </select>
+      </div>
     </form>
+
+    <div class="mt-2">
+      <form method="GET" action="{{route('dashboard.restaurants.index')}}">
+        <div class="d-flex flex-inline form-group">
+          <div class="col-4">
+            <span>店舗名</span>
+          </div>
+          <div class="col">
+            <input type="text" id="search-restaurants" name="keyword" value="{{$keyword}}" class="form-control" placeholder="店舗名">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary text-white mt-3">検索</button>
+      </form>
+    </div>
   </div>
+
 
   <div class="table-responsive mt-5">
     <div>
@@ -98,5 +107,6 @@
   </div>
 
   {{$restaurants->links()}}
+</div>
 </div>
 @endsection

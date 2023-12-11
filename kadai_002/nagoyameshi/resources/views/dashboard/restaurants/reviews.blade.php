@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="w-75 m-auto">
-  <h2>レビュー一覧</h2>
+<div class="w-85 m-auto">
+  <h2 class="mb-4">レビュー一覧</h2>
   <div class="bg-light p-3">
     <div class="container">
       <div class="row mb-2">

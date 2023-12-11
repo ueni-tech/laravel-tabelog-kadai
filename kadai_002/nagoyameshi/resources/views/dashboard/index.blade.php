@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
-<div class="container w-75">
+<div class="w-85 m-auto">
 
   <h2 class="mb-4">サマリー</h2>
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="w-85 m-auto">
-  <h2 class="mb-3">会員一覧</h2>
+  <h2 class="mb-4">会員一覧</h2>
   @if (session('flash_message'))
   <div class="alert alert-success">
     {{ session('flash_message') }}
@@ -20,32 +20,32 @@
 
   <div class="container mb-3">
     <div class="row mb-2 align-items-center">
-      <span class="col-4">会員数合計</span>
+      <span class="col-3">会員数合計</span>
       <span class="col"><span>{{ $total_count }}名</span></span>
     </div>
     <form action="{{route('dashboard.users.index')}}">
       <div class="row mb-2 align-items-center">
-        <div class="col-4">
+        <div class="col-3">
           <span>名前検索</span>
         </div>
         <div class="col">
-          <input type="text" name="name" value="{{$name}}" class="form-control">
+          <input type="text" name="name" value="{{$name}}" class="form-control" placeholder="名前">
         </div>
         <div class="col">
-          <button type="submit" class="btn btn-primary text-white">検索</button>
+          <button type="submit" class="btn btn-primary btn-sm text-white">検索</button>
         </div>
       </div>
     </form>
     <form action="{{route('dashboard.users.index')}}">
       <div class="row mb-2 align-items-center">
-        <div class="col-4">
+        <div class="col-3">
           <span>メールアドレス検索</span>
         </div>
         <div class="col">
-          <input type="text" name="email" value="{{$email}}" class="form-control">
+          <input type="text" name="email" value="{{$email}}" class="form-control" placeholder="メールアドレス">
         </div>
         <div class="col">
-          <button type="submit" class="btn btn-primary text-white">検索</button>
+          <button type="submit" class="btn btn-primary btn-sm text-white">検索</button>
         </div>
       </div>
     </form>
@@ -59,7 +59,7 @@
       <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-danger">このユーザーを削除する</button>
+        <button type="submit" class="btn btn-sm btn-outline-danger">このユーザーを削除する</button>
       </form>
     </div>
   </div>

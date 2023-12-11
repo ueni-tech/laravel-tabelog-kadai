@@ -1,8 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="w-75">
-  <h1>店舗登録</h1>
+<div class="w-85 m-auto">
+  <div class="mb-4"><a href="{{route('dashboard.restaurants.index')}}" class="link-secondary">&laquo; 店舗一覧に戻る</a></div>
+  <h2 class="mb-4">新規店舗登録</h2>
 
   @if($errors->any())
   <div class="alert alert-danger">
@@ -13,7 +14,6 @@
     </ul>
   </div>
   @endif
-  <hr>
 
   <form method="POST" action="{{route('dashboard.restaurants.store')}}" class="mb-5" enctype="multipart/form-data">
     @csrf

@@ -1,9 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="w-75">
-  <h1>会社概要</h1>
-  <hr>
+<div class="w-85 m-auto">
+  <h2 class="mb-4">会社概要</h2>
   @if (session('message'))
   <div class="alert alert-success">
     {{ session('message') }}
@@ -43,12 +42,10 @@
         <input type="text" id="company-number_of_employees" name="number_of_employees" class="form-control col-8" value="{{$company->number_of_employees}}">
       </div>
       <div class="form-inline my-4 row">
-        <button type="submit" class="btn btn-primary">更新</button>
+        <button type="submit" class="btn btn-primary w-25">更新</button>
       </div>
     </div>
   </form>
   @endforeach
-</div>
-
 </div>
 @endsection

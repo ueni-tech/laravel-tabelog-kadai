@@ -1,8 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="w-75">
-  <h1>店舗編集</h1>
+<div class="w-85 m-auto">
+  <div class="mb-4"><a href="{{route('dashboard.restaurants.index')}}" class="link-secondary">&laquo; 店舗一覧に戻る</a></div>
+  <h2 class="mb-4">店舗情報編集</h2>
   @if($errors->any())
   <div class="alert alert-danger">
     <ul class="mb-0">
@@ -12,8 +13,6 @@
     </ul>
   </div>
   @endif
-
-  <hr>
 
   <form method="POST" action="{{route('dashboard.restaurants.update', $restaurant)}}" class="mb-5" enctype="multipart/form-data">
     @csrf
@@ -83,7 +82,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-start">
-        <button type="submit" class="w-25 btn btn-primary">店舗情報を更新</button>
+        <button type="submit" class="w-25 btn btn-primary">更新</button>
       </div>
   </form>
 
