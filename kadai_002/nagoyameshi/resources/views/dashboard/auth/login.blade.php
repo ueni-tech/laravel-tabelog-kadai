@@ -17,7 +17,7 @@
       <form method="POST" action="{{ route('dashboard.login') }}">
         @csrf
 
-        <div class="form-group">
+        <div class="form-group mb-3">
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror samuraimart-login-input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="メールアドレス">
 
           @error('email')
