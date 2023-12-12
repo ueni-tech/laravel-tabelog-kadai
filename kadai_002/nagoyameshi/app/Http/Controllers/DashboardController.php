@@ -47,8 +47,8 @@ class DashboardController extends Controller
         }
 
         // 特定の月のサブスクリプションの合計金額を取得
-        $year = null; // 指定年
-        $month = null; // 指定月
+        $year = null;
+        $month = null;
         $specify_month_total_amount = 0;
         if ($request->year && $request->month) {
             $year = $request->year;
@@ -75,7 +75,6 @@ class DashboardController extends Controller
                     echo '価格情報の取得に失敗しました。';
                 }
             }
-            dump($specify_month_total_amount);
         }
 
         return view('dashboard.index', compact('users_total_count', 'users_subscribed_count', 'restaurants_total_count', 'reservations_this_month_count', 'total_amount', 'specify_month_total_amount', 'year', 'month'));
