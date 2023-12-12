@@ -39,7 +39,10 @@
                 <span>評価</span>
                 <div>
                   <span class="star-rating me-1" data-rate="{{round($restaurant_ranking->reviews->avg('score') * 2, 0) / 2}}"></span>
-                  <span>{{round($restaurant_ranking->reviews->avg('score'), 1)}} （{{$restaurant_ranking->reviews->count()}}件）</span>
+                  <span>{{round($restaurant_ranking->reviews->avg('score'), 1)}}</span>
+                </div>
+                <div>
+                  <span>{{$restaurant_ranking->reviews->count()}}件</span>
                 </div>
               </div>
             </div>
@@ -71,7 +74,10 @@
                 <span>評価</span>
                 <div>
                   <span class="star-rating me-1" data-rate="{{round($restaurant->reviews->avg('score') * 2, 0) / 2}}"></span>
-                  <span>{{round($restaurant->reviews->avg('score'), 1)}} （{{$restaurant->reviews->count()}}件）</span>
+                  <span>{{round($restaurant->reviews->avg('score'), 1)}}</span>
+                </div>
+                <div>
+                  <span>{{$restaurant->reviews->count()}}件</span>
                 </div>
               </div>
             </div>
