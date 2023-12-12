@@ -74,16 +74,48 @@
           <div class="card-header">
             <span class="card-title">当月サブスク合計額</span>
           </div>
-          <div class="card-body">
-            <p class="card-text text-end">{{$total_amount}} 円</p>
+          <div class="card-body d-flex justify-content-end align-items-center">
+            <p class="card-text text-end fs-4">{{$total_amount}} 円</p>
           </div>
         </div>
-        <div class="card col-4">
+        <div class="card col-6">
           <div class="card-header">
             <span class="card-title">月別サブスク合計額</span>
           </div>
           <div class="card-body">
-            <p class="card-text text-end"> 円</p>
+            <div class="container">
+              <form action="{{route('dashboard.index')}}" method="get">
+                <div class="row mb-3">
+                  <div class="col-4">
+                    <select class="form-select form-select-sm" name="year" id="year">
+                      <option selected value="">年</option>
+                      @for($i = 2023; $i <= date('Y'); $i++) @if($i==$year) <option value="{{$i}}" selected>{{$i}}年</option>
+                        @else
+                        <option value="{{$i}}">{{$i}}年</option>
+                        @endif
+                        @endfor
+                    </select>
+                  </div>
+                  <div class="col-4">
+                    <select class="form-select form-select-sm" name="month" id="month">
+                      <option selected value="">月</option>
+                      @for($i = 1; $i <= 12; $i++) @if($i==$month) <option value="{{$i}}" selected>{{$i}}月</option>
+                        @else
+                        <option value="{{$i}}">{{$i}}月</option>
+                        @endif
+                        @endfor
+                    </select>
+                  </div>
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-sm">検索</button>
+                  </div>
+                </div>
+              </form>
+              <div class="row">
+                <p class="card-text text-end col-11 fs-4">{{$specify_month_total_amount}} 円</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
