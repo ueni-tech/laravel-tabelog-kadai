@@ -29,8 +29,8 @@
           <option value="desc" selected>追加日の新しい順</option>
           <option value="asc">追加日の古い順</option>
           @else
-          <option value="desc">お気に入り追加の新しい順</option>
-          <option value="asc" selected>お気に入り追加の古い順</option>
+          <option value="desc">追加日の新しい順</option>
+          <option value="asc" selected>追加日の古い順</option>
           @endif
         </select>
       </form>
