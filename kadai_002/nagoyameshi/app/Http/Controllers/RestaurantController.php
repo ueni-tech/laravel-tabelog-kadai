@@ -76,7 +76,7 @@ class RestaurantController extends Controller
                     $query->where('category_id', $request->category_id);
                 });
                 $total_count = $restaurants->count();
-                $restaurants->groupBy('restaurants.id', 'restaurants.name', 'restaurants.address', 'restaurants.postal_code', 'restaurants.image', 'restaurants.created_at', 'restaurants.updated_at', 'restaurants.opening_time', 'restaurants.closing_time', 'restaurants.description')
+                $restaurants = $restaurants->groupBy('restaurants.id', 'restaurants.name', 'restaurants.address', 'restaurants.postal_code', 'restaurants.image', 'restaurants.created_at', 'restaurants.updated_at', 'restaurants.opening_time', 'restaurants.closing_time', 'restaurants.description')
                 ->orderByDesc('average_score')
                 ->paginate(10);
             } else {
