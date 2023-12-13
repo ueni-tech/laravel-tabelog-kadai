@@ -41,7 +41,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware('auth:admins')->name('dashboard.index');
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.form');
     Route::post('login', [LoginController::class, 'login'])->name('login');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('categories', CategoryController::class)->middleware('auth:admins');
