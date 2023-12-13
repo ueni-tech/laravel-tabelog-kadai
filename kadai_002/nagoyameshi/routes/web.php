@@ -71,7 +71,8 @@ Route::post('reviews', [ReviewController::class, 'store'])->middleware('auth')->
 Route::get('reviews/{review}', [ReviewController::class, 'show'])->name('reviews.show');
 Route::get('reviews/{review}/edit/{restaurant}', [ReviewController::class, 'edit'])->middleware('auth')->name('reviews.edit');
 Route::put('reviews/{review}', [ReviewController::class, 'update'])->middleware('auth')->name('reviews.update');
-Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware(['auth', 'auth:admins'])->name('reviews.destroy');
+// Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware(['auth', 'auth:admins'])->name('reviews.destroy');
+Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->middleware('auth_or_admin')->name('reviews.destroy');
 
 Route::controller(mainUserController::class)->group(function () {
     Route::get('users/mypage', 'mypage')->middleware('auth')->name('mypage');

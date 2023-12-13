@@ -42,7 +42,7 @@
         @if ($review->user_id === Auth::id())
         <div class="d-flex">
           <a href="{{route('reviews.edit', [$review, $restaurant])}}" class="me-2 text-secondary">編集</a>
-          <form action="{{route('reviews.destroy', $review)}}" method="POST">
+          <form action="{{route('reviews.destroy', $review)}}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
             @csrf
             @method('DELETE')
             <button type="submit" class="text-danger">削除</button>
@@ -59,14 +59,13 @@
         </li>
       </ul>
     </div>
-    @elseif ($loop->iteration <= 3)
-    <div class="card mb-3">
+    @elseif ($loop->iteration <= 3) <div class="card mb-3">
       <div class="card-header d-flex justify-content-between">
         <div>{{$review->user->name}}</div>
         @if ($review->user_id === Auth::id())
         <div class="d-flex">
           <a href="{{route('reviews.edit', [$review, $restaurant])}}" class="me-2 text-secondary">編集</a>
-          <form action="{{route('reviews.destroy', $review)}}" method="POST">
+          <form action="{{route('reviews.destroy', $review)}}" method="POST" onsubmit="return confirm('本当に削除してもよろしいですか？');">
             @csrf
             @method('DELETE')
             <button type="submit" class="text-danger">削除</button>
@@ -82,24 +81,24 @@
           {{$review->content}}
         </li>
       </ul>
-    </div>
-    @endif
-    @endforeach
-    @if (Auth::user()->subscribed('default'))
-    {{$reviews->links()}}
-    @endif
-
-    @if (Auth::user()->subscribed('default'))
-    <div class="text-center mt-5">
-      <a href="{{route('reviews.create', $restaurant)}}" class="btn btn-primary bg_main text-white shadow-sm w-50">レビューを投稿する</a>
-    </div>
-    @else
-    <div class="text-center">
-      <p>レビューを全件表示するには<a href="{{route('subscription')}}">有料プランへの登録</a>が必要です。</p>
-    </div>
-    @endif
-
   </div>
+  @endif
+  @endforeach
+  @if (Auth::user()->subscribed('default'))
+  {{$reviews->links()}}
+  @endif
+
+  @if (Auth::user()->subscribed('default'))
+  <div class="text-center mt-5">
+    <a href="{{route('reviews.create', $restaurant)}}" class="btn btn-primary bg_main text-white shadow-sm w-50">レビューを投稿する</a>
+  </div>
+  @else
+  <div class="text-center">
+    <p>レビューを全件表示するには<a href="{{route('subscription')}}">有料プランへの登録</a>が必要です。</p>
+  </div>
+  @endif
+
+</div>
 </div>
 
 @endsection

@@ -65,100 +65,107 @@
   </div>
 
   <div class="mt-4">
-    <div class="container border">
-      <div class="row">
-        <span class="fw-bold bg-body-secondary py-1">ユーザー情報</span>
+    <div class="container">
+      @if (session('message'))
+      <div class="alert alert-success">
+        {{ session('message') }}
       </div>
-      <div class="row my-1">
-        <div class="col-4 bg-light">
-          <p class="mb-0 text-end">ID</p>
+      @endif
+      <div class="border">
+        <div class="row">
+          <span class="fw-bold bg-body-secondary py-1">ユーザー情報</span>
         </div>
-        <div class="col">
-          <p class="mb-0">{{$user->id}}</p>
+        <div class="row my-1">
+          <div class="col-4 bg-light">
+            <p class="mb-0 text-end">ID</p>
+          </div>
+          <div class="col">
+            <p class="mb-0">{{$user->id}}</p>
+          </div>
+        </div>
+        <div class="row my-1">
+          <div class="col-4 bg-light">
+            <p class="mb-0 text-end">名前</p>
+          </div>
+          <div class="col">
+            <p class="mb-0">{{$user->name}}</p>
+          </div>
+        </div>
+        <div class="row my-1">
+          <div class="col-4 bg-light">
+            <p class="mb-0 text-end">フリガナ</p>
+          </div>
+          <div class="col">
+            <p class="mb-0">{{$user->furigana}}</p>
+          </div>
+        </div>
+        <div class="row my-1">
+          <div class="col-4 bg-light">
+            <p class="mb-0 text-end">メールアドレス</p>
+          </div>
+          <div class="col">
+            <p class="mb-0">{{$user->email}}</p>
+          </div>
+        </div>
+        <div class="row my-1">
+          <div class="col-4 bg-light">
+            <p class="mb-0 text-end">登録日時</p>
+          </div>
+          <div class="col">
+            <p class="mb-0">{{$user->created_at}}</p>
+          </div>
+        </div>
+        <div class="row my-1">
+          <div class="col-4 bg-light">
+            <p class="mb-0 text-end">ステータス</p>
+          </div>
+          <div class="col">
+            @if($user->subscribed('default'))
+            <span class="badge bg-info">有料会員</span>
+            @else
+            <span class="badge bg-secondary">無料会員</span>
+            @endif
+          </div>
         </div>
       </div>
-      <div class="row my-1">
-        <div class="col-4 bg-light">
-          <p class="mb-0 text-end">名前</p>
-        </div>
-        <div class="col">
-          <p class="mb-0">{{$user->name}}</p>
-        </div>
-      </div>
-      <div class="row my-1">
-        <div class="col-4 bg-light">
-          <p class="mb-0 text-end">フリガナ</p>
-        </div>
-        <div class="col">
-          <p class="mb-0">{{$user->furigana}}</p>
-        </div>
-      </div>
-      <div class="row my-1">
-        <div class="col-4 bg-light">
-          <p class="mb-0 text-end">メールアドレス</p>
-        </div>
-        <div class="col">
-          <p class="mb-0">{{$user->email}}</p>
-        </div>
-      </div>
-      <div class="row my-1">
-        <div class="col-4 bg-light">
-          <p class="mb-0 text-end">登録日時</p>
-        </div>
-        <div class="col">
-          <p class="mb-0">{{$user->created_at}}</p>
-        </div>
-      </div>
-      <div class="row my-1">
-        <div class="col-4 bg-light">
-          <p class="mb-0 text-end">ステータス</p>
-        </div>
-        <div class="col">
-          @if($user->subscribed('default'))
-          <span class="badge bg-info">有料会員</span>
+
+      <div class="row mt-4">
+        <p class="fw-bold">投稿レビュー</p>
+        <div class="w-100">
+          @if($reviews->count() > 0)
+          @foreach($reviews as $review)
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <div>
+                <div>
+                  <span>店舗名：</span><span>{{$review->restaurant->name}}</span>
+                </div>
+                <div>
+                  <span>投稿日：</span><span>{{$review->updated_at}}</span>
+                </div>
+              </div>
+              <div>
+                <form action="{{route('reviews.destroy', $review)}}" method="post" class="d-inline" onsubmit="return confirm('本当に削除してもよろしいですか？');">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                </form>
+              </div>
+            </div>
+            <div class="card-body">
+              <span>評価：{{$review->score}}</span>
+              <hr>
+              <span>{{$review->content}}</span>
+            </div>
+          </div>
+          @endforeach
+          {{$reviews->links()}}
           @else
-          <span class="badge bg-secondary">無料会員</span>
+          <div class="alert alert-info">
+            レビューはまだありません。
+          </div>
           @endif
         </div>
-      </div>
-    </div>
-
-    <div class="row mt-4">
-      <p class="fw-bold">投稿レビュー</p>
-      <div class="w-100">
-        @if($reviews->count() > 0)
-        @foreach($reviews as $review)
-        <div class="card mb-4">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <div>
-              <div>
-                <span>店舗名：</span><span>{{$review->restaurant->name}}</span>
-              </div>
-              <div>
-                <span>投稿日：</span><span>{{$review->updated_at}}</span>
-              </div>
-            </div>
-            <div>
-              <form action="{{route('reviews.destroy', $review)}}" method="post" class="d-inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm">削除</button>
-              </form>
-            </div>
-          </div>
-          <div class="card-body">
-            <span>評価：{{$review->score}}</span>
-            <hr>
-            <span>{{$review->content}}</span>
-          </div>
-        </div>
-        @endforeach
-        {{$reviews->links()}}
-        @else
-        <div class="alert alert-info">
-          レビューはまだありません。
-        </div>
-        @endif
       </div>
     </div>
   </div>

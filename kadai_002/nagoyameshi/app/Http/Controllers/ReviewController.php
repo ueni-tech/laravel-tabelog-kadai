@@ -130,15 +130,15 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Review $review)
-    {
-            
+    {       
             // レビューが見つからない場合のエラーハンドリング
             if (!$review) {
                 return back()->withErrors(['message' => '指定されたレビューが見つかりません。']);
             }
-    
+            
             $review->delete();
     
+            // 元のページにリダイレクト
             return back()->with('message', 'レビューを削除しました。');
     }
 }
