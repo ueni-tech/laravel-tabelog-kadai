@@ -42,23 +42,31 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        $request->validate([
-            'name' => 'required',
-            'furigana' => 'required|regex:/^[ァ-ヶー　]+$/u',
-            'email' => 'required|email'
-        ],
-        [
-            'name.required' => '名前を入力してください。',
-            'furigana.required' => 'フリガナを入力してください。',
-            'furigana.regex' => 'フリガナは全角カタカナで入力してください。',
-            'email.required' => 'メールアドレスを入力してください。',
-            'email.email' => 'メールアドレスを正しく入力してください。'
-        ]);
+        $request->validate(
+            [
+                'name' => 'required',
+                'furigana' => 'required|regex:/^[ァ-ヶー　]+$/u',
+                'email' => ['required', 'string', 'custom_email', 'max:255', 'unique:users']
+            ],
+            [
+                'name.required' => '名前を入力してください。',
+                'furigana.required' => 'フリガナを入力してください。',
+                'furigana.regex' => 'フリガナは全角カタカナで入力してください。',
+                'email.required' => 'メールアドレスを入力してください。',
+            ]
+        );
 
         $user->name = $request->input('name');
         $user->furigana = $request->input('furigana');
         $user->email = $request->input('email');
         $user->update();
+
+        // stripeの顧客情報を更新
+        $user->updateStripeCustomer([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
+
 
         return redirect()->route('mypage.edit')->with('message', '会員情報を更新しました。');
     }

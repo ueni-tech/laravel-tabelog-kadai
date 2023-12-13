@@ -27,6 +27,12 @@
 
       <hr class="mb-4">
 
+      @if (session('error'))
+      <div class="alert alert-danger">
+        {{ session('error') }}
+      </div>
+      @endif
+
       <form id="setup-form" action="{{ route('subscription.post')}}" method="post">
         @csrf
         <input id="card-holder-name" type="text" placeholder="カード名義人" name="card-holder-name">
