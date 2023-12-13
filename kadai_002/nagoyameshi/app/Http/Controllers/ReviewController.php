@@ -61,18 +61,7 @@ class ReviewController extends Controller
         $review->restaurant_id = $restaurantId;
         $review->save();
 
-        return redirect()->route('reviews.index', compact('restaurant'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Review $review)
-    {
-        //
+        return redirect()->route('reviews.index', compact('restaurant'))->with('message', 'レビューを投稿しました。');
     }
 
     /**
