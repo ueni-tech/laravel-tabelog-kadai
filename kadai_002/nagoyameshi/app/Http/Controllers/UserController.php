@@ -6,6 +6,7 @@ use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class UserController extends Controller
 {
@@ -79,7 +80,17 @@ class UserController extends Controller
      */
     public function destroy()
     {
-        Auth::user()->delete();
+        $user = Auth::user();
+
+        // stripeのサブスクリプションを停止
+        $subscription = $user->subscription('default');
+        if ($subscription && $subscription->active()) {
+            $subscription->cancel();
+        }
+
+        // ユーザーを削除
+        $user->delete();
+
         return redirect('/');
     }
 
