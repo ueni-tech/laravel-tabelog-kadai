@@ -112,6 +112,13 @@ class RestaurantController extends Controller
     {
         Auth::user()->togglefavorite($restaurant);
 
+        // メッセージを分けてセッションに保存　isFavoriteメソッドはRestautant.phpに記述
+        if ($restaurant->isFavoritedBy(Auth::user())) {
+            session()->flash('message', 'お気に入りに追加しました。');
+        } else {
+            session()->flash('message', 'お気に入りを解除しました。');
+        }
+        
         return back();
     }
 }

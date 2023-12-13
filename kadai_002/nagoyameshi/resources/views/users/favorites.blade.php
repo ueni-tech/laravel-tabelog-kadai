@@ -7,20 +7,22 @@
   <div class="w-75 m-auto mt-3">
     <div>
       <h1 class="text-center mb-4">お気に入り店舗</h1>
-      @if (session('message'))
-      <div class="alert alert-success">
-        {{ session('message') }}
+      <div class="w-50 m-auto">
+        @if (session('message'))
+        <div class="alert alert-success">
+          {{ session('message') }}
+        </div>
+        @endif
+        @if($errors->any())
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
       </div>
-      @endif
-      @if($errors->any())
-      <div class="alert alert-danger">
-        <ul class="mb-0">
-          @foreach($errors->all() as $error)
-          <li>{{$error}}</li>
-          @endforeach
-        </ul>
-      </div>
-      @endif
 
       <form method="GET" action="{{ route('mypage.favorite')}}" class="d-flex align-items-center mb-3">
         <span class="me-2">並び替え</span>
