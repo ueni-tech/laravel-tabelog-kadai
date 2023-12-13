@@ -6,6 +6,13 @@
 <div class="subscription pb-4">
   <div class="container d-flex justify-content-center mt-3">
     <div class="w-50">
+      <div class="my-2">
+        @if (session('message'))
+        <div class="alert alert-success">
+          {{ session('message') }}
+        </div>
+        @endif
+      </div>
       <h1 class="text-center mb-3">有料会員解約申請</h1>
       @if(! $onGracePeriod)
       <p class="text-center">有料会員を解約すると以下の特典を受けられなくなります。</p>

@@ -33,6 +33,11 @@ class ReservationController extends Controller
         $request->validate([
             'reserved_datetime' => 'required',
             'number_of_people' => 'required|integer'
+        ],
+        [
+            'reserved_datetime.required' => '予約日時を入力してください。',
+            'number_of_people.required' => '人数を入力してください。',
+            'number_of_people.integer' => '人数は整数で入力してください。'
         ]);
 
         // 予約日時が過去でないかチェック

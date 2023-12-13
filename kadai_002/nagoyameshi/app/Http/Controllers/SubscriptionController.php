@@ -74,12 +74,12 @@ class SubscriptionController extends Controller
     function destroy(Request $request)
     {
         $request->user()->subscription('default')->cancel();
-        return redirect()->route('mypage');
+        return back()->with('message', '解約申請を受け付けました。');
     }
 
     function resume(Request $request)
     {
         $request->user()->subscription('default')->resume();
-        return redirect()->route('mypage');
+        return back()->with('message', '有料会員契約を再開しました。');
     }
 }

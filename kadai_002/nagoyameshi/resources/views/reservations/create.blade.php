@@ -41,7 +41,7 @@
         <div class="form-group row mb-3">
           <label for="number_of_people" class="col-3 col-form-label fw-bold">人数</label>
           <div class="col-9">
-            <input type="number" name="number_of_people" id="number_of_people" class="form-control" value="{{old('number_of_people')}}">
+            <input type="number" name="number_of_people" id="number_of_people" class="form-control" value="{{old('number_of_people')}}" min="1" max="20" step="1">
           </div>
         </div>
         <div class="text-center">
