@@ -43,19 +43,33 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        $request->validate(
-            [
-                'name' => 'required',
-                'furigana' => 'required|regex:/^[ァ-ヶー　]+$/u',
-                'email' => ['required', 'string', 'custom_email', 'max:255', 'unique:users']
-            ],
-            [
-                'name.required' => '名前を入力してください。',
-                'furigana.required' => 'フリガナを入力してください。',
-                'furigana.regex' => 'フリガナは全角カタカナで入力してください。',
-                'email.required' => 'メールアドレスを入力してください。',
-            ]
-        );
+        if ($user->email !== $request->input('email')) {
+            $request->validate(
+                [
+                    'name' => 'required',
+                    'furigana' => 'required|regex:/^[ァ-ヶー　]+$/u',
+                    'email' => ['required', 'string', 'custom_email', 'max:255', 'unique:users']
+                ],
+                [
+                    'name.required' => '名前を入力してください。',
+                    'furigana.required' => 'フリガナを入力してください。',
+                    'furigana.regex' => 'フリガナは全角カタカナで入力してください。',
+                    'email.required' => 'メールアドレスを入力してください。',
+                ]
+            );
+        } else {
+            $request->validate(
+                [
+                    'name' => 'required',
+                    'furigana' => 'required|regex:/^[ァ-ヶー　]+$/u',
+                ],
+                [
+                    'name.required' => '名前を入力してください。',
+                    'furigana.required' => 'フリガナを入力してください。',
+                    'furigana.regex' => 'フリガナは全角カタカナで入力してください。',
+                ]
+            );
+        }
 
         $user->name = $request->input('name');
         $user->furigana = $request->input('furigana');
