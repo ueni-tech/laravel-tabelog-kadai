@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="w-85 m-auto">
+  <div class="mb-3"><a href="{{route('dashboard.restaurants.index')}}" class="link-secondary">&laquo; 店舗一覧に戻る</a></div>
   <h2 class="mb-4">レビュー一覧</h2>
-  <div class="bg-light p-3">
+  <div class="bg-light p-3 mb-3">
     <div class="container">
       <div class="row mb-2">
         <div class="col-2">
