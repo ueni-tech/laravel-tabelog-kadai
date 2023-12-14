@@ -13,12 +13,12 @@ class UserController extends Controller
         $users = User::sortable()->paginate(15);
         $total_count = User::count();
 
-        // バリデーション
         $request->validate([
-            'email' => 'nullable|regex:/^[A-Za-z0-9._%+-]+$/',
+            'name' => 'nullable|string',
+            'email' => 'nullable|email',
         ],
         [
-            'email.regex' => 'メールアドレスは英数字と記号のみで入力してください'
+            'email.email' => 'メールアドレスを正しい形式で入力してください'
         ]);
 
         $name = null;

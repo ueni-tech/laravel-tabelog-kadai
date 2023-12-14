@@ -29,7 +29,7 @@
           <span>名前検索</span>
         </div>
         <div class="col">
-          <input type="text" name="name" value="{{$name}}" class="form-control" placeholder="名前">
+          <input type="text" name="name" value="{{old('name', $name)}}" class="form-control" placeholder="名前">
         </div>
         <div class="col">
           <button type="submit" class="btn btn-sm btn-primary text-white">検索</button>
@@ -42,7 +42,7 @@
           <span>メールアドレス検索</span>
         </div>
         <div class="col">
-          <input type="text" name="email" value="{{$email}}" class="form-control" placeholder="メールアドレス">
+          <input type="text" name="email" value="{{old('email', $email)}}" class="form-control" placeholder="メールアドレス">
         </div>
         <div class="col">
           <button type="submit" class="btn btn-sm btn-primary text-white">検索</button>
