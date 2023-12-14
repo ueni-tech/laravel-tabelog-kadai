@@ -52,7 +52,7 @@
         <span class="fw-bold">従業員数</span>
       </div>
       <div class="col">
-        <span>{{$company_info->number_of_employees}}</span>
+        <span>{{$company_info->number_of_employees}} 名</span>
       </div>
     </div>
   </div>

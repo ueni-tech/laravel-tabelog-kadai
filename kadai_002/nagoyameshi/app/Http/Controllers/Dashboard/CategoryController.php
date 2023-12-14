@@ -65,6 +65,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories',
+            ],
+            [
+                'name.required' => 'カテゴリ名を入力してください。',
+                'name.string' => 'カテゴリ名は文字列で入力してください。',
+                'name.max' => 'カテゴリ名は255文字以内で入力してください。',
+                'name.unique' => 'そのカテゴリ名は既に登録されています。',
+            ]);
+            
         $category->name = $request->input('name');
         $category->save();
 
