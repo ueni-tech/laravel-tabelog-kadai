@@ -3,38 +3,20 @@
 @section('content')
 <div class="w-85 m-auto">
   <h2 class="mb-4">店舗一覧</h2>
-  <div class="col-md-6">
-    <form method="GET" action="{{ route('dashboard.restaurants.index')}}" class="form-inline d-flex align-items-center">
-      <div class="col-4">
-        <span class="me-2">並び替え</span>
-      </div>
-      <div class="col">
-        <select name="sort" onChange="this.form.submit();" class="form-select form-inline">
-          <option value="">並び替え（デフォルト）</option>
-          @foreach ($sort as $key => $value)
-          @if ($sorted == $value)
-          <option value=" {{$value}}" selected>{{ $key }}</option>
-          @else
-          <option value=" {{$value}}">{{ $key }}</option>
-          @endif
-          @endforeach
-        </select>
+  <div>
+    <form method="GET" action="{{route('dashboard.restaurants.index')}}">
+      <div class="d-flex align-items-center flex-inline form-group">
+        <div class="col-2">
+          <span>店舗名</span>
+        </div>
+        <div class="col-4 me-2">
+          <input type="text" id="search-restaurants" name="keyword" value="{{$keyword}}" class="form-control" placeholder="店舗名">
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary btn-sm text-white">検索</button>
+        </div>
       </div>
     </form>
-
-    <div class="mt-2">
-      <form method="GET" action="{{route('dashboard.restaurants.index')}}">
-        <div class="d-flex flex-inline form-group">
-          <div class="col-4">
-            <span>店舗名</span>
-          </div>
-          <div class="col">
-            <input type="text" id="search-restaurants" name="keyword" value="{{$keyword}}" class="form-control" placeholder="店舗名">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary text-white mt-3">検索</button>
-      </form>
-    </div>
   </div>
 
 
@@ -46,7 +28,30 @@
       </div>
       @endif
     </div>
-    <h3>合計{{$total_count}}件</h3>
+
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="fs-4">検索結果：合計{{$total_count}}件</div>
+      <div>
+        <form method="GET" action="{{ route('dashboard.restaurants.index')}}" class="form-inline">
+          @if(request('keyword'))
+          <input type="hidden" name="keyword" value="{{request('keyword')}}">
+          @endif
+          <div>
+            <select name="sort" onChange="this.form.submit();" class="form-select form-inline">
+              <option value="">並び替え（デフォルト）</option>
+              @foreach ($sort as $key => $value)
+              @if ($sorted == $value)
+              <option value=" {{$value}}" selected>{{ $key }}</option>
+              @else
+              <option value=" {{$value}}">{{ $key }}</option>
+              @endif
+              @endforeach
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <div class="d-flex justify-content-between mt-4">
       <div>{{$restaurants->links()}}</div>
       <div>
